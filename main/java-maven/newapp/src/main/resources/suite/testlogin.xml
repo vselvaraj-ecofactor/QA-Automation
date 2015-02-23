@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Mobile Automation Login Test">
+
+	<test name="Login" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity2" />
+				<include name="stub" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.newapp.LoginTest" />
+		</classes>
+	</test>
+	<listeners>
+		<listener
+			class-name="com.ecofactor.qa.automation.platform.listener.AutomationTransformer" />
+	</listeners>
+</suite>

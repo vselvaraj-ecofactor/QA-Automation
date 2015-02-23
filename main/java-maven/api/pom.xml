@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ecofactor.qa</groupId>
+		<artifactId>automation</artifactId>
+		<version>1.0</version>
+	</parent>
+	<groupId>com.ecofactor.qa.automation</groupId>
+	<artifactId>api</artifactId>
+	<name>API Automation Test</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ecofactor.qa.automation</groupId>
+			<artifactId>util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ecofactor.qa.automation</groupId>
+			<artifactId>dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ecofactor.common</groupId>
+			<artifactId>ecofactor-pojo</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>jackson-core-asl</artifactId>
+					<groupId>org.codehaus.jackson</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jackson-mapper-asl</artifactId>
+					<groupId>org.codehaus.jackson</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>ecofactor-core</artifactId>
+					<groupId>com.ecofactor.common</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>ecofactor-digi</artifactId>
+					<groupId>com.ecofactor.common</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-codec</artifactId>
+					<groupId>commons-codec</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>

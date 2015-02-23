@@ -1,0 +1,1 @@
+mvn exec:java -Dexec.mainClass="com.ecofactor.qa.automation.mobile.device.AndroidOperations" -Dforce=false

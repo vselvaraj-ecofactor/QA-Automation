@@ -1,0 +1,17 @@
+<suite name="Subscription Test">
+	<test name="Subscription Tests" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.qtc.regression.SubscriptionTest" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+
+	</listeners>
+
+</suite>

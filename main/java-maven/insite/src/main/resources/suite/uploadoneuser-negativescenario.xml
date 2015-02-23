@@ -1,0 +1,22 @@
+
+<suite name="Insite Upload One User Negative Scenario Tests">
+
+	<test name="Upload One User Negative Scenario" preserve-order="true">
+		<groups>
+			<run>
+				<include name="negativescenario" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="com.ecofactor.qa.automation.insite.regression.UploadOneUserTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>

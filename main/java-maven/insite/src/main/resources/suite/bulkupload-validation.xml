@@ -1,0 +1,21 @@
+
+<suite name="Insite BulkUpload Validation Tests">
+
+	<test name="Bulk Upload Validation" preserve-order="true">
+		<groups>
+			<run>
+				<include name="validation" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.insite.regression.OnBoardTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>

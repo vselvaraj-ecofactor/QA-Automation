@@ -1,0 +1,21 @@
+ <suite name="Insite Login Sanity Tests">
+
+	<test name="Login Sanity" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.insite.regression.LoginTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>
+

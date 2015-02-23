@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="consumerapi" verbose="1" >
+
+ 	<test name="energysavings" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity1" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.consumerapi.SavingsAPI_Test"/>
+		</classes>
+	</test>
+ <listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+</suite>

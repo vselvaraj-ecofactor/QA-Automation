@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Mobile">
+
+	<test name="ThermostatControl" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity1" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.newapp.ThermostatControlTest"/>
+		</classes>
+	</test>
+	<listeners>
+		<listener
+			class-name="com.ecofactor.qa.automation.platform.listener.AutomationTransformer" />
+	</listeners>
+</suite>

@@ -1,0 +1,21 @@
+<suite name="Insite User Management Negative Tests">
+
+	<test name="User Management Negative" preserve-order="true">
+		<groups>
+			<run>
+				<include name="negative" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.insite.regression.UserManagementNegativeScenarioTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>
+

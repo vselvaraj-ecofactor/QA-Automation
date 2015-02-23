@@ -1,0 +1,22 @@
+<suite name="Insite Partner Management Sanity Tests">
+
+	<test name="Partner Management Sanity" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.insite.regression.PartnerManagementTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>
+
+

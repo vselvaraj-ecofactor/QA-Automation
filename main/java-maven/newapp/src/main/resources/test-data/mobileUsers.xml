@@ -1,0 +1,197 @@
+<test-data id="mobileTest">
+
+	<global-features>
+		<feature>login.valid</feature>
+		<feature>thermostat.single</feature>
+		<feature>thermostat.dataCollection</feature>
+		<feature>thermostat.connected</feature>
+		<feature>thermostat.multiple</feature>
+		<feature>thermostat.disconnected</feature>
+		<feature>mode.heat</feature>
+		<feature>mode.cool</feature>
+		<feature>mode.off</feature>
+	</global-features>
+
+	<user>
+		<userId-key>validlogin.username</userId-key>
+		<password-key>validlogin.password</password-key>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.single</feature>
+			<feature>mode.heat</feature>
+			<feature>mode.cool</feature>
+			<feature>mode.off</feature>
+			<feature>thermostat.connected</feature>
+			<feature>thermostat.dataCollection</feature>
+		</features>
+	</user>
+
+	<user>
+		<userId-key>multiplethermostat.username</userId-key>
+		<password-key>multiplethermostat.password</password-key>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.connected</feature>
+			<feature>thermostat.multiple</feature>
+			<feature>thermostat.dataCollection</feature>
+			<feature>mode.heat</feature>
+			<feature>mode.cool</feature>
+			<feature>mode.off</feature>
+		</features>
+	</user>
+
+	<user>
+		<userId-key>heatonlythermostat.username</userId-key>
+		<password-key>heatonlythermostat.password</password-key>
+		<feature>thermostat.dataCollection</feature>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.connected</feature>
+			<feature>thermostat.single</feature>
+			<feature>mode.heat</feature>
+			<feature>mode.off</feature>
+			<feature>thermostat.dataCollection</feature>
+		</features>
+	</user>
+
+	<user>
+		<userId-key>coolonlythermostat.username</userId-key>
+		<password-key>coolonlythermostat.password</password-key>
+		<feature>thermostat.dataCollection</feature>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.connected</feature>
+			<feature>thermostat.single</feature>
+			<feature>mode.cool</feature>
+			<feature>mode.off</feature>
+			<feature>thermostat.dataCollection</feature>
+		</features>
+	</user>
+
+	<user>
+		<userId-key>multipleOneOnOneOff.username</userId-key>
+		<password-key>multipleOneOnOneOff.password</password-key>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.multiple</feature>
+			<feature>thermostat.dataCollection</feature>
+			<feature>mode.heat</feature>
+			<feature>mode.cool</feature>
+			<feature>mode.off</feature>
+			<feature>thermostat.disconnected</feature>
+		</features>
+	</user>
+
+	<user>
+		<userId-key>multipleLocationDynamic.username</userId-key>
+		<password-key>multipleLocationDynamic.password</password-key>
+		<features>
+			<feature>login.valid</feature>
+			<feature>thermostat.multiple</feature>
+			<feature>thermostat.dataCollection</feature>
+			<feature>mode.heat</feature>
+			<feature>mode.cool</feature>
+			<feature>mode.off</feature>
+			<feature>thermostat.connected</feature>
+			<feature>location.multiple</feature>
+		</features>
+	</user>
+
+	<configs>
+		<config id="unregistered.username">qa+apps-hc001@ecofactor.com</config>
+		<config id="unregistered.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="invalid.username">invalidUserName@ecofactor.com</config>
+		<config id="invalid.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="incorrect.password">trOppus</config>
+	</configs>
+
+	<configs>
+		<config id="specialchar.username">qa+apps(*%$#@![]{}\|/,.~@ecofactor.com</config>
+	</configs>
+
+	<configs>
+		<config id="asciithermostat.username">qa+apps-c3@ecofactor.com</config>
+		<config id="asciithermostat.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="blankThermostat.username">qa+apps-hc36@ecofactor.com</config>
+		<config id="blankThermostat.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="tstatOffline.username">qa+apps-hc9@ecofactor.com</config>
+		<config id="tstatOffline.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="multipleLoc.username">appsml2</config>
+		<config id="multipleLoc.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="multipleTstatAlpha.username">qa+apps-hc38@ecofactor.com</config>
+		<config id="multipleTstatAlpha.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="provisionalStatus.username">qa+apps-test1@ecofactor.com</config>
+		<config id="provisionalStatus.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="provisioned.username">qa+ActiveProvision@ecofactor.com</config>
+		<config id="provisioned.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="defaultSavingsEnegry.username">qa+apps-hc16@ecofactor.com</config>
+		<config id="defaultSavingsEnegry.password">ecofactor</config>
+		<config id="defaultSavingsEnegry.thermostatId">6462</config>
+	</configs>
+
+	<configs>
+		<config id="ecpcoreWithoutsavings.username">appsh2</config>
+		<config id="ecpcoreWithoutSavings.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="ecpcoreWithSavings.username">qa+firmtest3@ecofactor.com</config>
+		<config id="ecpcorewithSavings.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="savingsWithSixMonthData.username">qa+ipa@ecofactor.com</config>
+		<config id="savingsWithSixMonthData.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="zeroRuntimeSavings.username">qa+apps-hc45@ecofactor.com</config>
+		<config id="zeroRuntimeSavings.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="learnMoreUser.username">qa+apps-hc29@ecofactor.com</config>
+		<config id="learnMoreUser.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="locationSwitcherMultiLoc.username">venkat.axim@gmail.com</config>
+		<config id="locationSwitcherMultiLoc.password">ecofactor</config>
+	</configs>
+	
+	<configs>
+		<config id="locationSwitcherMultiTstat.username">Prasannaa.v@aximsoft.com</config>
+		<config id="locationSwitcherMultiTstat.password">ecofactor</config>
+	</configs>
+
+	<configs>
+		<config id="savingsprecision.locationId">53839</config>
+	</configs>
+</test-data>

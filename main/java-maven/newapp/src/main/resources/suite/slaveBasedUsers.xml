@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="SlaveBasedUsers">
+
+	<test name="Mobile" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity1" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.newapp.SlaveUsersTest"/>
+		</classes>
+	</test>
+
+</suite>

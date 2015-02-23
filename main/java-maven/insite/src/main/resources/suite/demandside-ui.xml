@@ -1,0 +1,20 @@
+<suite name="Insite Demand Side Management UI Tests">
+
+	<test name="Demand Side Management UI" preserve-order="true">
+		<groups>
+			<run>
+				<include name="ui" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.insite.regression.DemandSideManagementTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" />
+	</listeners>
+
+</suite>

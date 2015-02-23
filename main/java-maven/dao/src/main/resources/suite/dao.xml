@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Dao Test cases">
+
+	<test name="Dao tests" preserve-order="true">	
+		
+		<classes>
+			<class name="com.ecofactor.qa.automation.dao.ThermostatRangeDataDaoTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+	</listeners>
+</suite>  

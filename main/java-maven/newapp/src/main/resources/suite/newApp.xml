@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Mobile">
+
+	<test name="Mobile" preserve-order="true">
+		<groups>
+			<run>
+				<include name="sanity1" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.newapp.NewAppDemoTest"/>
+		</classes>
+	</test>
+</suite>

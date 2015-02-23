@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="MobileMasterRegression">
+	<suite-files>
+		<suite-file path="mobileregression1.xml"></suite-file>
+		<suite-file path="mobileregression2.xml"></suite-file>
+		<suite-file path="mobileregression3.xml"></suite-file>
+		<suite-file path="mobileregression4.xml"></suite-file>
+	</suite-files>
+
+	<listeners>
+		<!-- listener class-name="com.ecofactor.qa.automation.util.TestLogListener" />
+		<listener class-name="com.ecofactor.qa.automation.util.TestResultSetUp" />
+		<listener class-name="com.ecofactor.qa.automation.util.test.JobValidator" /-->
+	</listeners>
+</suite>

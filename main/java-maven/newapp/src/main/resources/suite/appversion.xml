@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="AppVersion">
+
+	<test name="AppVersion" preserve-order="true">
+		<groups>
+			<run>
+				<include name="appversion" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ecofactor.qa.automation.newapp.ApplicationTest" />
+		</classes>
+	</test>
+</suite>
