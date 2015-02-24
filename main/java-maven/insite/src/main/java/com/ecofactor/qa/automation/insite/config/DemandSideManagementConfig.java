@@ -76,7 +76,6 @@ public class DemandSideManagementConfig  extends BaseConfig  {
 	public static final String DELETE_EVENT_BTN="deleteEventBtn";
 	public static final String CONFIRM_CANCEL_EVENT_BTN="confirmCancelEventBtn";
 
-
 	public static final String ADD_EVENT_HOUR_PART="addEventHourPart";
 	public static final String ADD_EVENT_DATE_PART="addEventDatePart";
 	public static final String EVENT_LIST_PAGE_FORM_NAME="eventListPageFormName";

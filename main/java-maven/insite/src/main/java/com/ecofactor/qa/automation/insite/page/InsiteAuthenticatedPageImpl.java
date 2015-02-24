@@ -35,16 +35,28 @@ import com.google.inject.Inject;
 public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl implements
         InsiteAuthenticatedPage {
 
+    /** The insite config. */
     @Inject
     protected InsiteConfig insiteConfig;
+
+    /** The insite login. */
     @Inject
     protected InsiteLogin insiteLogin;
+
+    /** The login config. */
     @Inject
     protected InsiteLoginConfig loginConfig;
 
+    /** The login. */
     protected boolean login = false;
+
+    /** The login user. */
     protected String loginUser = null;
+
+    /** The sub menu. */
     private WebElement subMenu = null;
+
+    /** The logger. */
     private static Logger logger = LoggerFactory.getLogger(InsiteAuthenticatedPageImpl.class);
 
     /**
@@ -77,6 +89,7 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
         if (insiteLogin.isAuthenticatedUser() && !insiteLogin.isAuthenticatedUser(userId)) {
             logger.info("Authenticated User is different, so logout");
             logout();
+
         }
         if (!insiteLogin.isAuthenticatedUser()) {
             logger.info("No Authenticated User, so load login page.");
@@ -85,32 +98,6 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
             insiteLogin.verifyLogin(userId);
         }
         loadPage();
-    }
-
-    /**
-     * Select page.
-     * @param pageName the page name
-     */
-    private void selectPage(String pageName) {
-
-        logger.info("select page from the menu.");
-        List<WebElement> menuItems = DriverConfig.getDriver().findElements(
-                By.id(insiteConfig.get(MENU_ID)));
-        if (menuItems != null && menuItems.size() > 0) {
-            WebElement linkElements = menuItems.get(0);
-            List<WebElement> linkElement = linkElements.findElements(By.tagName(TAG_ANCHOR));
-            if (linkElement != null && linkElement.size() > 0) {
-                for (WebElement element : linkElement) {
-                    smallWait();
-                    if (element.getText().equalsIgnoreCase(insiteConfig.get(pageName))) {
-                        logger.info("click the menu item");
-                        element.click();
-                        break;
-                    }
-                }
-            }
-        }
-
     }
 
     /**
@@ -238,83 +225,6 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
     }
 
     /**
-     * Click onsite installation.
-     */
-    public void clickOnsiteInstallation() {
-
-        DriverConfig.setLogString("select onsite installation page.", true);
-        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
-            selectPage(INSTALLATION);
-        smallWait();
-        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
-
-        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
-                insiteConfig.get(ONSITE_INSTALLATION), SHORT_TIMEOUT);
-        rolesLink.click();
-
-        smallWait();
-
-        logger.info("check if onsite installation page is displayed.");
-        String url = insiteConfig.get(INSTALLATION_PAGE).split("\\?")[0];
-        logger.info(DriverConfig.getDriver().getCurrentUrl()
-                + " check if onsite installation page is selected." + url);
-        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
-                "Url is different");
-    }
-
-    /**
-     * Click scheduling.
-     */
-    public void clickScheduling() {
-
-        DriverConfig.setLogString("select schedule page.", true);
-        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
-            selectPage(INSTALLATION);
-        smallWait();
-        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
-
-        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
-                insiteConfig.get(SCHEDULING), SHORT_TIMEOUT);
-        rolesLink.click();
-
-        smallWait();
-
-        logger.info("check if schedule page is displayed.", true);
-        String url = insiteConfig.get(SCHEDULE_URL).split("\\?")[0];
-        logger.info(DriverConfig.getDriver().getCurrentUrl()
-                + " check if scheduling page is selected." + url);
-        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
-                "Url is different");
-    }
-
-    /**
-     * Click pre configuration.
-     */
-    public void clickPreConfiguration() {
-
-        DriverConfig.setLogString(
-                "select pre configuration page." + insiteConfig.get(PRECONFIG_URL), true);
-        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
-            selectPage(INSTALLATION);
-
-        smallWait();
-        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
-
-        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
-                insiteConfig.get(PRE_CONFIGURATION), SHORT_TIMEOUT);
-        rolesLink.click();
-
-        smallWait();
-
-        logger.info("check if preconfig page is displayed.");
-        String url = insiteConfig.get(PRECONFIG_URL).split("\\?")[0];
-        logger.info(DriverConfig.getDriver().getCurrentUrl()
-                + " check if preconfig page is selected." + url);
-        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
-                "Url is different");
-    }
-
-    /**
      * Click demand side management.
      * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickDemandSideManagement()
      */
@@ -354,6 +264,10 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
                 "Url is different");
     }
 
+    /**
+     * Click upload one user.
+     * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickUploadOneUser()
+     */
     @Override
     public void clickUploadOneUser() {
 
@@ -372,10 +286,12 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
         String url = insiteConfig.get(UPLOAD_ONE_USER).split("\\?")[0];
         logger.info(DriverConfig.getDriver().getCurrentUrl()
                 + " check if upload one user page is selected." + url);
-        // Assert.assertTrue(driver.getCurrentUrl().contains(url), "Url is different");
+        // Assert.assertTrue(driver.getCurrentUrl().contains(url),
+        // "Url is different");
     }
 
     /**
+     * Click bulk upload.
      * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickBulkUpload()
      */
     @Override
@@ -399,6 +315,7 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
     }
 
     /**
+     * Click history.
      * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickHistory()
      */
     @Override
@@ -423,6 +340,10 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
                 "Url is different");
     }
 
+    /**
+     * Click errors to be fixed.
+     * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickErrorsToBeFixed()
+     */
     @Override
     public void clickErrorsToBeFixed() {
 
@@ -466,14 +387,19 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
         String url = insiteConfig.get(ADMIN_PAGE).split("\\?")[0];
         logger.info(DriverConfig.getDriver().getCurrentUrl()
                 + " check if partner management page is selected." + url);
-       /* Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
-                "Url is different");
-*/
+        /*
+         * Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url ),
+         * "Url is different");
+         */
     }
-    
+
+    /**
+     * Click ecp core management.
+     * @see com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage#clickECPCoreManagement()
+     */
     @Override
-    public void clickECPCoreManagement(){
-        
+    public void clickECPCoreManagement() {
+
         DriverConfig.setLogString("select ECP Core Management page.", true);
         selectPage(ADMIN);
         smallWait();
@@ -488,6 +414,115 @@ public abstract class InsiteAuthenticatedPageImpl extends InsitePageImpl impleme
         String url = insiteConfig.get(ECP_CORE_PAGE).split("\\?")[0];
         logger.info(DriverConfig.getDriver().getCurrentUrl()
                 + " check if ecpcore management page is selected." + url);
+    }
+
+    /**
+     * Click onsite installation.
+     */
+    public void clickOnsiteInstallation() {
+
+        DriverConfig.setLogString("select onsite installation page.", true);
+        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
+            selectPage(INSTALLATION);
+        smallWait();
+        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
+
+        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
+                insiteConfig.get(ONSITE_INSTALLATION), SHORT_TIMEOUT);
+        rolesLink.click();
+
+        smallWait();
+
+        logger.info("check if onsite installation page is displayed.");
+        String url = insiteConfig.get(INSTALLATION_PAGE).split("\\?")[0];
+        logger.info(DriverConfig.getDriver().getCurrentUrl()
+                + " check if onsite installation page is selected." + url);
+        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
+                "Url is different");
+    }
+
+    /**
+     * Click scheduling.
+     */
+    public void clickScheduling() {
+
+        DriverConfig.setLogString("select schedule page." + insiteConfig.get(SCHEDULE_URL), true);
+        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
+            selectPage(INSTALLATION);
+        smallWait();
+        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
+
+        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
+                insiteConfig.get(SCHEDULING), SHORT_TIMEOUT);
+        rolesLink.click();
+
+        smallWait();
+
+        logger.info("check if schedule page is displayed.", true);
+        String url = insiteConfig.get(SCHEDULE_URL).split("\\?")[0];
+        logger.info(DriverConfig.getDriver().getCurrentUrl()
+                + " check if scheduling page is selected." + url);
+        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
+                "Url is different");
+    }
+
+    /**
+     * Click pre configuration.
+     */
+    public void clickPreConfiguration() {
+
+        DriverConfig.setLogString(
+                "select pre configuration page." + insiteConfig.get(PRECONFIG_URL), true);
+        if (!DriverConfig.getDriver().getCurrentUrl().contains(insiteConfig.get(INSTALLATION_PAGE)))
+            selectPage(INSTALLATION);
+
+        smallWait();
+        subMenu = DriverConfig.getDriver().findElement(By.id("submenu"));
+
+        final String currentUrl = DriverConfig.getDriver().getCurrentUrl();
+        WebElement rolesLink = retrieveSubElementByTagText(DriverConfig.getDriver(), subMenu, "a",
+                insiteConfig.get(PRE_CONFIGURATION), SHORT_TIMEOUT);
+        rolesLink.click();
+
+        smallWait();
+
+        logger.info("check if preconfig page is displayed.");
+        String url = insiteConfig.get(PRECONFIG_URL).split("\\?")[0];
+        logger.info(DriverConfig.getDriver().getCurrentUrl()
+                + " check if preconfig page is selected." + url);
+        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(url),
+                "Url is different");
+
+        DriverConfig.setLogString("select Installation page.", true);
+        DriverConfig.getDriver().navigate().to(currentUrl);
+        Assert.assertTrue(DriverConfig.getDriver().getCurrentUrl().contains(currentUrl),
+                "Url is different");
+    }
+
+    /**
+     * Select page.
+     * @param pageName the page name
+     */
+    private void selectPage(String pageName) {
+
+        logger.info("select page from the menu.");
+        List<WebElement> menuItems = DriverConfig.getDriver().findElements(
+                By.id(insiteConfig.get(MENU_ID)));
+        if (menuItems != null && menuItems.size() > 0) {
+            WebElement linkElements = menuItems.get(0);
+            List<WebElement> linkElement = linkElements.findElements(By.tagName(TAG_ANCHOR));
+            if (linkElement != null && linkElement.size() > 0) {
+                for (WebElement element : linkElement) {
+                    smallWait();
+                    if (element.getText().equalsIgnoreCase(insiteConfig.get(pageName))) {
+                        logger.info("click the menu item");
+                        element.click();
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 
 }

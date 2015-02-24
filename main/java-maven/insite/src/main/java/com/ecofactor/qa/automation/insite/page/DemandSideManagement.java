@@ -28,8 +28,6 @@ import com.ecofactor.qa.automation.insite.page.InsiteAuthenticatedPage;
  */
 public interface DemandSideManagement extends InsiteAuthenticatedPage {
 
-
-
     /**
      * Load page frame.
      */
@@ -49,13 +47,13 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
     public Map<String, Object> getFirstDisplayedProgramDetails() throws ParseException;
 
     /**
-	 * Gets the specific program details.
-	 *
-	 * @param programName name
-	 * @return the specific program details
-	 * @throws ParseException the parse exception
-	 */
+     * Gets the specific program details.
+     * @param programName name
+     * @return the specific program details
+     * @throws ParseException the parse exception
+     */
     public Map<String, Object> getSpecificProgramDetails(String programName) throws ParseException;
+
     /**
      * Gets the program details.Retrieve the program data as displayed in the screen.
      * @return the program details
@@ -69,8 +67,8 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param eventName the event name
      * @throws ParseException the parse exception
      */
-    public void testMetaDataVerificationForLSEventName(final String programeName, final String eventName)
-            throws ParseException;
+    public void testMetaDataVerificationForLSEventName(final String programeName,
+            final String eventName) throws ParseException;
 
     /**
      * Test meta data verification for LS event description.
@@ -79,8 +77,8 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param eventDescription the event description
      * @throws ParseException the parse exception
      */
-    public void testMetaDataVerificationForLSEventDescription(final String programeName, final String eventName,
-            final String eventDescription) throws ParseException;
+    public void testMetaDataVerificationForLSEventDescription(final String programeName,
+            final String eventName, final String eventDescription) throws ParseException;
 
     /**
      * Create a new event, with description according the null or empty value. Verify the event name
@@ -89,7 +87,8 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param eventDescription the event description
      * @param checkEventName the check event name
      */
-    public void triggerNewEvent(final String newEventName, final String eventDescription, final boolean checkEventName);
+    public void triggerNewEvent(final String newEventName, final String eventDescription,
+            final boolean checkEventName);
 
     /**
      * Gets the program id.
@@ -145,7 +144,8 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param testRuleElement the test rule element
      * @return the integer
      */
-    public Integer selectOptions(WebElement createGroupsFormElement, WebElement addBtn, WebElement testRuleElement);
+    public Integer selectOptions(WebElement createGroupsFormElement, WebElement addBtn,
+            WebElement testRuleElement);
 
     /**
      * Initiate event creation. Method to generate event start time and initiate event creation.
@@ -156,8 +156,9 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @return the map
      * @throws ParseException the parse exception
      */
-    public Map<String, Object> initiateEventCreation(final String programName, final String duration,
-            final String eventMode, final boolean precoolOpted) throws ParseException;
+    public Map<String, Object> initiateEventCreation(final String programName,
+            final String duration, final String eventMode, final boolean precoolOpted)
+            throws ParseException;
 
     /**
      * Gets the page size.
@@ -175,8 +176,9 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param eventCheckCount the event check count
      * @throws ParseException the parse exception
      */
-    public void testEventPaginationLimit(final String programName, final String duration, final String eventMode,
-            final boolean precoolOpted, Integer eventCheckCount) throws ParseException;
+    public void testEventPaginationLimit(final String programName, final String duration,
+            final String eventMode, final boolean precoolOpted, Integer eventCheckCount)
+            throws ParseException;
 
     /**
      * Switchdefault content.
@@ -190,15 +192,16 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @param maxOffsetValue the max offset value
      * @throws ParseException the parse exception
      */
-    public void verifyDisplayedProperties(Map<String, Object> programUiProperties, EcpCoreLSProgram dbEcpCoreLSProgram,
-            String maxOffsetValue) throws ParseException;
+    public void verifyDisplayedProperties(Map<String, Object> programUiProperties,
+            EcpCoreLSProgram dbEcpCoreLSProgram, String maxOffsetValue) throws ParseException;
 
     /**
      * Verifies error message For Event Creation With Past StartDate.
      * @param ecpCoreLSProgram the ecp core ls program
      * @throws ParseException the parse exception
      */
-    public void checkErrorMsgForEventCreationWithPastStartDate(EcpCoreLSProgram ecpCoreLSProgram) throws ParseException;
+    public void checkErrorMsgForEventCreationWithPastStartDate(EcpCoreLSProgram ecpCoreLSProgram)
+            throws ParseException;
 
     /**
      * Create Event Method creates LS Event in a given LS Program. Start date , duration and mode
@@ -212,8 +215,9 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @return the string
      * @throws ParseException the parse exception
      */
-    public String createEvent(final boolean pastEvent, final String startDate, final String duration,
-            final String mode, final boolean precoolOpted, String groupName) throws ParseException;
+    public String createEvent(final boolean pastEvent, final String startDate,
+            final String duration, final String mode, final boolean precoolOpted, String groupName)
+            throws ParseException;
 
     /**
      * select Event Link Initiates event search by loading event list page.
@@ -261,14 +265,16 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @return the load shaping event report
      * @throws ParseException the parse exception
      */
-    public LoadShapingEventReport completedEventStatusView(final String programName) throws ParseException;
+    public LoadShapingEventReport completedEventStatusView(final String programName)
+            throws ParseException;
 
     /**
      * verifies if Start Time Too Earlier Error message is displayed for earlier start time.
      * @param dbEcpCoreLSProgram the db ecp core ls program
      * @throws ParseException the parse exception
      */
-    public void verifyStartTimeTooEarlierError(EcpCoreLSProgram dbEcpCoreLSProgram) throws ParseException;
+    public void verifyStartTimeTooEarlierError(EcpCoreLSProgram dbEcpCoreLSProgram)
+            throws ParseException;
 
     /**
      * Gets the program id for the displayed LS program dfrom the UI.
@@ -290,7 +296,6 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @return true, if successful
      */
     public boolean tryEditingScheduledEvent();
-
 
     /**
      * get UTC Time method gets the UTC time (including day light option) for a given local date
@@ -328,8 +333,8 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      * @return the valid event start time
      * @throws ParseException the parse exception
      */
-    public String getValidEventStartTime(Calendar eventDate, String timezone, EcpCoreLSProgram ecpCoreLSProgram)
-            throws ParseException;
+    public String getValidEventStartTime(Calendar eventDate, String timezone,
+            EcpCoreLSProgram ecpCoreLSProgram) throws ParseException;
 
     /**
      * Check events and groups link.
@@ -355,10 +360,22 @@ public interface DemandSideManagement extends InsiteAuthenticatedPage {
      */
     public List<String> iterateProgramPageList();
 
-	/**
-	 * Filter status.
-	 *
-	 * @param status the status
-	 */
-	public void filterStatus(String status);
+    /**
+     * Filter status.
+     * @param status the status
+     */
+    public void filterStatus(String status);
+
+    /**
+     * Initiate event with proper time.
+     * @param programName the program name
+     * @param duration the duration
+     * @param eventMode the event mode
+     * @param precoolOpted the precool opted
+     * @return the map
+     * @throws ParseException
+     */
+    public Map<String, Object> initiateEventWithProperTime(final String programName,
+            final String duration, final String eventMode, final boolean precoolOpted)
+            throws ParseException;
 }

@@ -5,8 +5,7 @@
 	<persistence-unit transaction-type="RESOURCE_LOCAL"
 		name="ecofactorPU">
 
-		<class>com.ecofactor.common.pojo.Algorithm</class>
-		<class>com.ecofactor.common.pojo.Address</class>
+		<class>com.ecofactor.common.pojo.Algorithm</class>	
 		<class>com.ecofactor.common.pojo.DailyScheduleInterval</class>
 		<class>com.ecofactor.common.pojo.DeviceType</class>
 		<class>com.ecofactor.common.pojo.DisconnectedDevice</class>
@@ -14,16 +13,14 @@
 		<class>com.ecofactor.common.pojo.DsScore</class>
 		<class>com.ecofactor.common.pojo.EcoData</class>
 		<class>com.ecofactor.common.pojo.EcpCore</class>
-		<class>com.ecofactor.common.pojo.EcpCorePartnerAccount</class>
-		<class>com.ecofactor.common.pojo.EcpCoreEnergyPricing</class>
+		<class>com.ecofactor.common.pojo.EcpCorePartnerAccount</class>		
 		<class>com.ecofactor.common.pojo.EcpCoreLocation</class>
 		<class>com.ecofactor.common.pojo.EcpSession</class>
 		<class>com.ecofactor.common.pojo.EcpSessionThermostat</class>
 		<class>com.ecofactor.common.pojo.Gateway</class>
 		<class>com.ecofactor.common.pojo.HvacComponent</class>
 		<class>com.ecofactor.common.pojo.HvacMfg</class>
-		<class>com.ecofactor.common.pojo.Location</class>
-		<class>com.ecofactor.common.pojo.LocationEnergyPricing</class>
+		<class>com.ecofactor.common.pojo.Location</class>		
 		<class>com.ecofactor.common.pojo.LocationSlog</class>
 		<class>com.ecofactor.common.pojo.ProgramRangeSchedule</class>
 		<class>com.ecofactor.common.pojo.ProgramWeeklySchedule</class>
@@ -65,10 +62,7 @@
 		<class>com.ecofactor.common.pojo.PagePartnerType</class>
 		<class>com.ecofactor.common.pojo.RolePage</class>
 		<class>com.ecofactor.common.pojo.ActionLog</class>
-		<class>com.ecofactor.common.pojo.EntityAttribute</class>
-		<class>com.ecofactor.common.pojo.Address</class>
-		<class>com.ecofactor.common.pojo.LocationEnergyPricing</class>
-		<class>com.ecofactor.common.pojo.EcpCoreEnergyPricing</class>
+		<class>com.ecofactor.common.pojo.EntityAttribute</class>		
 		<class>com.ecofactor.common.pojo.EcpCoreAttribute</class>
 		<class>com.ecofactor.common.pojo.LocationAttribute</class>
 		<class>com.ecofactor.common.pojo.ThermostatHvacStage</class>

@@ -77,5 +77,6 @@ public class DaoModule extends AbstractModule {
         bind(PartnerAccountDao.class).to(PartnerAccountDaoImpl.class).in(Singleton.class);
         bind(PartnerAccountTypeDao.class).to(PartnerAccountTypeDaoImpl.class).in(Singleton.class);
         bind(PartnerTypeDao.class).to(PartnerTypeDaoImpl.class).in(Singleton.class);
+        bind(LoginTokensDao.class).to(LoginTokensDaoImpl.class).in(Singleton.class);
     }
 }

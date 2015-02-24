@@ -372,15 +372,16 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
         smallWait();
         final List<WebElement> userRow = DriverConfig.getDriver().findElements(By.id("user"));
         for (int i = 0; i < userRow.size(); i++) {
-            
-            WebElement subElement = retrieveElementByAttributeValueContainsForSubElement(DriverConfig.getDriver(), userRow.get(i),
-                    TAG_ANCHOR, ATTR_HREF, "javascript", MEDIUM_TIMEOUT);
-            if(subElement != null && !subElement.getText().isEmpty()){
+
+            WebElement subElement = retrieveElementByAttributeValueContainsForSubElement(
+                    DriverConfig.getDriver(), userRow.get(i), TAG_ANCHOR, ATTR_HREF, "javascript",
+                    MEDIUM_TIMEOUT);
+            if (subElement != null && !subElement.getText().isEmpty()) {
                 subElement.click();
                 break;
             }
         }
-       
+
         tinyWait();
     }
 
@@ -678,9 +679,10 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
         List<WebElement> userRow = DriverConfig.getDriver().findElements(By.id("user"));
         for (int i = 0; i < userRow.size(); i++) {
             userRow = DriverConfig.getDriver().findElements(By.id("user"));
-            WebElement subElement = retrieveElementByAttributeValueContainsForSubElement(DriverConfig.getDriver(), userRow.get(i),
-                    TAG_ANCHOR, ATTR_HREF, "javascript", SHORT_TIMEOUT);
-            if(subElement != null && !subElement.getText().isEmpty()){
+            WebElement subElement = retrieveElementByAttributeValueContainsForSubElement(
+                    DriverConfig.getDriver(), userRow.get(i), TAG_ANCHOR, ATTR_HREF, "javascript",
+                    SHORT_TIMEOUT);
+            if (subElement != null && !subElement.getText().isEmpty()) {
                 subElement.click();
                 tinyWait();
                 WebElement ecpText = DriverConfig.getDriver().findElement(By.id("ecpCore"));
@@ -694,7 +696,6 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
                 clickFind();
                 tinyWait();
             }
-
         }
 
         return isEcp;
@@ -703,7 +704,8 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
     /**
      * Click done.
      */
-    private void clickDone() {
+    @Override
+    public void clickDone() {
 
         DriverConfig.setLogString("Click Done", true);
         final WebElement doneButton = DriverConfig.getDriver().findElement(
@@ -732,12 +734,12 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
     @Override
     public void clickMenu(String menu) {
 
-        DriverConfig.setLogString("Click Menu : "+menu, true);
+        DriverConfig.setLogString("Click Menu : " + menu, true);
         final List<WebElement> menus = DriverConfig.getDriver().findElements(
                 By.xpath("//*[@id='menu']/li/a"));
         for (WebElement webElement : menus) {
 
-            if(webElement.getText().equalsIgnoreCase(menu)){
+            if (webElement.getText().equalsIgnoreCase(menu)) {
                 webElement.click();
                 break;
             }
@@ -754,12 +756,12 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
     @Override
     public void clickSubMenu(String subMenu) {
 
-        DriverConfig.setLogString("Click SubMenu : "+subMenu, true);
+        DriverConfig.setLogString("Click SubMenu : " + subMenu, true);
         final List<WebElement> menus = DriverConfig.getDriver().findElements(
                 By.xpath("//*[@id='submenu']/a"));
         for (WebElement webElement : menus) {
 
-            if(webElement.getText().equalsIgnoreCase(subMenu)){
+            if (webElement.getText().equalsIgnoreCase(subMenu)) {
                 webElement.click();
                 break;
             }
@@ -768,7 +770,6 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
         tinyWait();
 
     }
-
 
     /**
      * @param fileName
@@ -780,10 +781,11 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
 
         DriverConfig.setLogString("Check File : " + fileName, true);
         boolean isdisplayed = false;
-        List<WebElement> pgmElements = DriverConfig.getDriver().findElements(By.xpath("//*[@id='user']/td[2]"));
+        List<WebElement> pgmElements = DriverConfig.getDriver().findElements(
+                By.xpath("//*[@id='user']/td[2]"));
 
         for (WebElement webElement : pgmElements) {
-            if(webElement.getText().equalsIgnoreCase(fileName)){
+            if (webElement.getText().equalsIgnoreCase(fileName)) {
                 if (webElement.isDisplayed()) {
 
                     isdisplayed = true;
@@ -793,14 +795,14 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
         }
         return isdisplayed;
     }
-    
+
     /**
      * @param tstatId
      * @see com.ecofactor.qa.automation.insite.page.RoleManagement#setTstatId(java.lang.String)
      */
     @Override
-    public void setTstatId(String tstatId){
-        
+    public void setTstatId(String tstatId) {
+
         DriverConfig.setLogString("Set Thermostat Id : " + tstatId, true);
         clearAndInput(DriverConfig.getDriver(), By.id("algo-tstat-ids"), tstatId);
     }
@@ -818,28 +820,27 @@ public class RoleManagementImpl extends InsiteAuthenticatedPageImpl implements R
     }
 
     /**
-     * 
      * @see com.ecofactor.qa.automation.insite.page.RoleManagement#clickSubscribe()
      */
     @Override
     public void clickSubscribe() {
 
         DriverConfig.setLogString("Click Subscribe", true);
-        WebElement subscribeBtn = DriverConfig.getDriver().findElement(By.xpath(".//*[@id='algo-actions-layout-bottom']/input[1]"));
+        WebElement subscribeBtn = DriverConfig.getDriver().findElement(
+                By.xpath(".//*[@id='algo-actions-layout-bottom']/input[1]"));
         subscribeBtn.click();
     }
 
     /**
-     * 
      * @see com.ecofactor.qa.automation.insite.page.RoleManagement#clickUnSubscribe()
      */
     @Override
     public void clickUnSubscribe() {
 
         DriverConfig.setLogString("Click UnSubscribe", true);
-        WebElement unSubscribeBtn = DriverConfig.getDriver().findElement(By.xpath(".//*[@id='algo-actions-layout-bottom']/input[2]"));
+        WebElement unSubscribeBtn = DriverConfig.getDriver().findElement(
+                By.xpath(".//*[@id='algo-actions-layout-bottom']/input[2]"));
         unSubscribeBtn.click();
     }
-    
 
 }

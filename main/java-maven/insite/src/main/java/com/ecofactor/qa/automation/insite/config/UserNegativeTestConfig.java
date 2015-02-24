@@ -1,5 +1,3 @@
-
-
 /*
  * UserTestConfig.java
  * Copyright (c) 2013, EcoFactor, All Rights Reserved.

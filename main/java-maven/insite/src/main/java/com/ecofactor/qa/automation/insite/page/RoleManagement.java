@@ -84,7 +84,7 @@ public interface RoleManagement extends InsiteAuthenticatedPage {
      * @param partnerType the partner type
      */
     public void createNewRole(final String roleName, final String roleDescription,
-            final String unAssignedPermission,final int partnerType);
+            final String unAssignedPermission, final int partnerType);
 
     /**
      * Enter role name.
@@ -119,58 +119,61 @@ public interface RoleManagement extends InsiteAuthenticatedPage {
      * Verify permissions mode.
      */
     public void verifyPermissionsMode();
-    
+
     /**
      * Click find.
      */
     public void clickFind();
-    
+
     /**
      * Check ecp.
      * @return true, if successful
      */
     public boolean checkEcp();
-    
-    
+
     /**
      * Click menu.
      * @param menu the menu
      */
-    public void  clickMenu(String menu);
-    
+    public void clickMenu(final String menu);
+
     /**
      * Click sub menu.
      * @param subMenu the sub menu
      */
-    public void  clickSubMenu(String subMenu);
-    
-    
+    public void clickSubMenu(final String subMenu);
+
     /**
      * Check uploaded file in history.
      * @param fileName the file name
      * @return true, if successful
      */
-    public boolean checkUploadedFileInHistory(String fileName);
-    
+    public boolean checkUploadedFileInHistory(final String fileName);
+
     /**
      * Sets the tstat id.
      * @param tstatId the new tstat id
      */
-    public void setTstatId(String tstatId);
-    
+    public void setTstatId(final String tstatId);
+
     /**
      * Gets the result.
      * @return the result
      */
     public String getResult();
-    
+
     /**
      * Click subscribe.
      */
     public void clickSubscribe();
-    
+
     /**
      * Click un subscribe.
      */
     public void clickUnSubscribe();
+
+    /**
+     * Click done.
+     */
+    public void clickDone();
 }

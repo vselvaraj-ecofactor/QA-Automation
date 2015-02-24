@@ -21,7 +21,7 @@ public interface InsiteAuthenticatedPage extends InsitePage {
      * @param userName the user name
      * @param password the password
      */
-    public void loadPage(String userName, String password);
+    public void loadPage(final String userName, final String password);
 
     /**
      * Load page.
@@ -38,7 +38,7 @@ public interface InsiteAuthenticatedPage extends InsitePage {
      * Verify welcome text.
      * @param userId the user id
      */
-    public abstract void verifyWelcomeText(String userId);
+    public abstract void verifyWelcomeText(final String userId);
 
     /**
      * Click User Management.
@@ -115,7 +115,7 @@ public interface InsiteAuthenticatedPage extends InsitePage {
      * Click partner management.
      */
     public void clickPartnerManagement();
-    
+
     /**
      * Click ecp core management.
      */

@@ -9,14 +9,16 @@
  */
 package com.ecofactor.qa.automation.insite.page;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * The Interface UserManagement.
- * @author $Author: vraj $
- * @version $Rev: 33518 $ $Date: 2015-01-19 18:48:10 +0530 (Mon, 19 Jan 2015) $
+ * @author $Author: vprasannaa $
+ * @version $Rev: 33623 $ $Date: 2015-02-20 11:54:43 +0530 (Fri, 20 Feb 2015) $
  */
 public interface UserManagement extends InsiteAuthenticatedPage {
 
@@ -234,12 +236,6 @@ public interface UserManagement extends InsiteAuthenticatedPage {
     public void clickEditIcon();
 
     /**
-     * Edits the email address.
-     * @param string the string
-     */
-    public void editEmailAddress(final String string);
-
-    /**
      * Gets the error message.
      * @return the error message
      */
@@ -374,7 +370,7 @@ public interface UserManagement extends InsiteAuthenticatedPage {
      * @return true, if is role available
      */
     public boolean isRoleAvailable(final String role);
-    
+
     /**
      * Gets the current page no.
      * @return the current page no
@@ -387,4 +383,151 @@ public interface UserManagement extends InsiteAuthenticatedPage {
      */
     public int getLastPageNo();
 
+    /**
+     * Edits the first name.
+     * @param firstName the first name
+     */
+    public void editFirstName(final String firstName);
+
+    /**
+     * Edits the last name.
+     * @param lastName the last name
+     */
+    public void editLastName(final String lastName);
+
+    /**
+     * Edits the email id.
+     * @param emailId the email id
+     */
+    public void editEmailId(final String emailId);
+
+    /**
+     * Edits the street address1.
+     * @param streetAddress the street address
+     */
+    public void editStreetAddress1(final String streetAddress);
+
+    /**
+     * Edits the street address2.
+     * @param streetAddress the street address
+     */
+    public void editStreetAddress2(final String streetAddress);
+
+    /**
+     * Checks if is menu displayed.
+     * @param menu the menu
+     * @return true, if is menu displayed
+     */
+    public boolean isMenuDisplayed(final String menu);
+
+    /**
+     * Checks if is sub menu displayed.
+     * @param subMenu the sub menu
+     * @return true, if is sub menu displayed
+     */
+    public boolean isSubMenuDisplayed(final String subMenu);
+
+    /**
+     * Gets the menu.
+     * @return the menu
+     */
+    public List<WebElement> getMenu();
+
+    /**
+     * Gets the sub menu.
+     * @return the sub menu
+     */
+    public List<WebElement> getSubMenu();
+
+    /**
+     * Edits the city.
+     * @param city the city
+     */
+    public void editCity(final String city);
+
+    /**
+     * Edits the state.
+     * @param state the state
+     */
+    public void editState(final String state);
+
+    /**
+     * Edits the zip.
+     * @param zip the zip
+     */
+    public void editZip(final String zip);
+
+    /**
+     * Edits the country.
+     * @param country the country
+     */
+    public void editCountry(final String country);
+
+    /**
+     * Edits the mobile phone number.
+     * @param mobilePhoneNumber the mobile phone number
+     */
+    public void editMobilePhoneNumber(final String mobilePhoneNumber);
+
+    /**
+     * Edits the home phone number.
+     * @param homePhoneNumber the home phone number
+     */
+    public void editHomePhoneNumber(final String homePhoneNumber);
+
+    /**
+     * Edits the fax.
+     * @param fax the fax
+     */
+    public void editFax(final String fax);
+
+    /**
+     * Click contact details tab.
+     */
+    public void clickContactDetailsTab();
+
+    /**
+     * Change contact details.
+     * @param streetAddress1 the street address1
+     * @param streetAddress2 the street address2
+     * @param city the city
+     * @param state the state
+     * @param zip the zip
+     * @param country the country
+     * @param mobilePhoneNum the mobile phone num
+     * @param pnoneNumber the pnone number
+     * @param faxNumber the fax number
+     */
+    public void changeContactDetails(final String streetAddress1, final String streetAddress2,
+            final String city, final String state, final String zip, final String country,
+            final String mobilePhoneNum, final String pnoneNumber, final String faxNumber);
+
+    /**
+     * Click role tab.
+     */
+    public void clickRoleTab();
+
+    /**
+     * Gets the account details.
+     * @return the account details
+     */
+    public Map<String, String> getContactDetails();
+
+    /**
+     * Click account details tab.
+     */
+    public void clickAccountDetailsTab();
+
+    /**
+     * Check assigned role details.
+     * @param roleDetails the role details
+     * @return the map
+     */
+    public void checkAssignedRoleDetails(final Map<String, String> roleDetails);
+
+    /**
+     * Gets the role details.
+     * @return the role details
+     */
+    public Map<String, String> getRoleDetails();
 }

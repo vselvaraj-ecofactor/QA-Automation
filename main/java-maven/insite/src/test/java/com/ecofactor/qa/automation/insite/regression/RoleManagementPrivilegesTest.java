@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -84,7 +86,6 @@ public class RoleManagementPrivilegesTest {
     @Inject
     private DemandSideManagement demandSideManagement;
 
-
     /** The test log util. */
     @Inject
     private TestLogUtil testLogUtil;
@@ -94,8 +95,6 @@ public class RoleManagementPrivilegesTest {
 
     /** The start. */
     private long start;
-
-
 
     /** The user subject. */
     private final String USER_SUBJECT = "Welcome to EcoFactor Insite - Your Temporary Password";
@@ -139,7 +138,10 @@ public class RoleManagementPrivilegesTest {
         start = System.currentTimeMillis();
 
         try {
-            if (method.getName() == "accLookUpOnBoardPrivilege" || method.getName() == "comcastPrivilege" || method.getName() == "conservationPrivilege" ||method.getName() == "nvePartnerPrivilege") {
+            if (method.getName() == "accLookUpOnBoardPrivilege"
+                    || method.getName() == "comcastPrivilege"
+                    || method.getName() == "conservationPrivilege"
+                    || method.getName() == "nvePartnerPrivilege") {
                 gmail.deleteOldMails((String) param[4], (String) param[5], (String) param[6],
                         (String) param[7]);
                 insiteLogin.clearUser();
@@ -195,16 +197,18 @@ public class RoleManagementPrivilegesTest {
      * @param password the password
      * @throws ParseException the parse exception
      */
-    @Test(dataProvider = "installerUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" }, priority = 8)
+    @Test(dataProvider = "installerUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void installerPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(PRE_CONFIGURATION)),
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ONSITE_INSTALLATION)),
                 "SubMenu Not Displayed");
-        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)),
+                "SubMenu Not Displayed");
     }
 
     /**
@@ -212,14 +216,15 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-     @Test(dataProvider = "scheduleUser", dataProviderClass = RoleDataProvider.class,
-    retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"sanity"}, priority = 12)
+    @Test(dataProvider = "scheduleUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void installerSchedulePrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
-        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)),
+                "SubMenu Not Displayed");
         roleManagement.clickTopFirstUser();
     }
 
@@ -228,11 +233,12 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "onSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" }, priority = 14)
+    @Test(dataProvider = "onSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void installerOnsiteInstallPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ONSITE_INSTALLATION)),
                 "SubMenu Not Displayed");
@@ -243,12 +249,12 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-     @Test(dataProvider = "preConfigUser", dataProviderClass = RoleDataProvider.class,
-     retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"sanity"}, priority = 15)
+    @Test(dataProvider = "preConfigUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void installerPreConfigPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(PRE_CONFIGURATION)),
                 "SubMenu Not Displayed");
@@ -259,13 +265,15 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "schedulePreConfigUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" }, priority = 4)
+    @Test(dataProvider = "schedulePreConfigUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void preConfigAndSchedulePrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 2, "Another SubMenu Available");
-        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)),
+                "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(PRE_CONFIGURATION)),
                 "SubMenu Not Displayed");
     }
@@ -275,13 +283,15 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "scheduleOnSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" }, priority = 5)
+    @Test(dataProvider = "scheduleOnSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void scheduleAndOnsiteInstallPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 2, "Another SubMenu Available");
-        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(SCHEDULING)),
+                "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ONSITE_INSTALLATION)),
                 "SubMenu Not Displayed");
     }
@@ -291,11 +301,12 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "preConfigOnSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" }, priority = 6)
+    @Test(dataProvider = "preConfigOnSiteInstallUser", dataProviderClass = RoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "sanity" })
     public void preConfigAndOnsiteInstallPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 2, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(PRE_CONFIGURATION)),
                 "SubMenu Not Displayed");
@@ -308,16 +319,17 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "accLookUpOnlyPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 7)
+    @Test(dataProvider = "accLookUpOnlyPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
     public void accLookUpOnlyPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ACCOUNT_LOOKUP)),
                 "SubMenu Not Displayed");
         roleManagement.clickFind();
-        Assert.assertTrue(roleManagement.checkEcp(),"Another ECP Available");
+        Assert.assertTrue(roleManagement.checkEcp(), "Another ECP Available");
     }
 
     /**
@@ -326,26 +338,29 @@ public class RoleManagementPrivilegesTest {
      * @param password the password
      * @throws ParseException the parse exception
      */
-    @Test(dataProvider = "utilityDRPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 1)
+    @Test(dataProvider = "utilityDRPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
     public void utilityDRPrivilege(String userId, String password) throws ParseException {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(LOAD_SHAPING)),
                 "SubMenu Not Displayed");
 
-        Map<String, Object>  eventDetails = new HashMap<String, Object>();
-        eventDetails = demandSideManagement.initiateEventCreation("QA Test Summer 2014_1", "60", "DRAFT", false);
+        Map<String, Object> eventDetails = new HashMap<String, Object>();
+        eventDetails = demandSideManagement.initiateEventCreation("QA Test Aximsoft 2014 New",
+                "60", "DRAFT", false);
         if (!eventDetails.isEmpty()) {
             WaitUtil.waitUntil(10000);
 
-            EcpCoreLSEvent ecpCoreLSEvent = lsProgramEventDao.listByEventName(eventDetails.get("eventName").toString(), "DRAFT")
-                    .get(0);
-            DriverConfig.setLogString("check if Event Name '" + ecpCoreLSEvent.getName() + "' is saved in database as draft", true);
-            Assert.assertTrue(ecpCoreLSEvent.getStatus().toString().equalsIgnoreCase("DRAFT"), "Event status is different");
+            List<EcpCoreLSEvent> ecpCoreLSEvent = lsProgramEventDao.listByEventName(eventDetails
+                    .get("eventName").toString(), "DRAFT");
+            DriverConfig.setLogString("check if Event Name '" + ecpCoreLSEvent.get(0).getName()
+                    + "' is saved in database as draft", true);
+            Assert.assertTrue(ecpCoreLSEvent.get(0).getStatus().toString()
+                    .equalsIgnoreCase("DRAFT"), "Event status is different");
         }
-
 
     }
 
@@ -377,11 +392,12 @@ public class RoleManagementPrivilegesTest {
      * @param newPassword the new password
      * @throws ParseException the parse exception
      */
-    @Test(dataProvider = "accOnBoardingUser", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 9)
-    public void accLookUpOnBoardPrivilege(String userId, String password,final String firstName, final String lastName, final String emailUrl,
-            final String emailUserName, final String emailPassword, final String subject,
-            final String emailAddress, final String accountUserName, final String activeUser,
-            final String partnerType, final String partner,
+    @Test(dataProvider = "accOnBoardingUser", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
+    public void accLookUpOnBoardPrivilege(String userId, String password, final String firstName,
+            final String lastName, final String emailUrl, final String emailUserName,
+            final String emailPassword, final String subject, final String emailAddress,
+            final String accountUserName, final String activeUser, final String partnerType,
+            final String partner,
 
             final String streetAddress1, final String streetAddress2, final String city,
             final String state, final String zip, final String country,
@@ -389,9 +405,12 @@ public class RoleManagementPrivilegesTest {
             final String availableRole, final String newPassword) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 3, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ACCOUNT_LOOKUP)),
                 "SubMenu Not Displayed");
@@ -414,14 +433,14 @@ public class RoleManagementPrivilegesTest {
         roleManagement.clickSubMenu(insiteConfig.get(BULK_UPLOADS));
         String filePath = onBoard.generateFilepath("csv");
 
-        String uploadUserName = onBoard.generateValidCSV(1, filePath,"199");
+        String uploadUserName = onBoard.generateValidCSV(1, filePath, "199");
 
         onBoard.uploadAndSubmitFile(filePath);
 
         onBoard.verifyUser(uploadUserName);
 
         roleManagement.clickSubMenu(insiteConfig.get(UPLOAD_ONE_USER));
-        uploadOneUser.populateForm(emailAddress,"199");
+        uploadOneUser.populateForm(emailAddress, "199");
         uploadOneUser.validateAndSubmitForm();
 
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
@@ -429,8 +448,8 @@ public class RoleManagementPrivilegesTest {
         currentDate = new Date();
         dateTimeStamp = formatter.format(currentDate);
         userManagement.createNewUser(firstName, lastName, emailAddress, accountUserName
-                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2,
-                city, state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
+                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2, city,
+                state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
         userManagement.logout();
         String temporaryPassword = gmail.getChangedPassword(GMAIL_URL, emailUserName, G_PASSWORD,
                 USER_SUBJECT, 0, 0);
@@ -453,7 +472,7 @@ public class RoleManagementPrivilegesTest {
         insiteLogin.logout();
         insiteLogin.login(userId, password);
         roleManagement.clickFind();
-        Assert.assertTrue(roleManagement.checkEcp(),"Another ECP Available");
+        Assert.assertTrue(roleManagement.checkEcp(), "Another ECP Available");
 
     }
 
@@ -462,17 +481,19 @@ public class RoleManagementPrivilegesTest {
      * @param userId the user id
      * @param password the password
      */
-    @Test(dataProvider = "customerCareOnBoardPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 10)
+    @Test(dataProvider = "customerCareOnBoardPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
     public void custCareOnBoardPrivilege(String userId, String password) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 1, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
         Assert.assertFalse(roleManagement.getSubMenu().size() > 4, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ERRORS_TO_BE_FIXED)),
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(BULK_UPLOADS)),
                 "SubMenu Not Displayed");
-        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(HISTORY)), "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(HISTORY)),
+                "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(UPLOAD_ONE_USER)),
                 "SubMenu Not Displayed");
 
@@ -489,15 +510,16 @@ public class RoleManagementPrivilegesTest {
         uploadOneUser.populateForm("user_" + System.currentTimeMillis() + "@gmail.com", "199");
         uploadOneUser.validateAndSubmitForm();
         roleManagement.clickSubMenu("History");
-        Assert.assertTrue(roleManagement.checkUploadedFileInHistory(insiteConfig.get(UPLOAD_ONE_USER)),
+        Assert.assertTrue(
+                roleManagement.checkUploadedFileInHistory(insiteConfig.get(UPLOAD_ONE_USER)),
                 "File Name Not Displayed");
         String[] fileName = filePath.split("/");
         for (int i = 0; i < fileName.length; i++) {
-           if(fileName[i].contains("bulkUploadFile")){
-               Assert.assertTrue(roleManagement.checkUploadedFileInHistory(fileName[i]),
-                       "File Name Not Displayed");
-               break;
-           }
+            if (fileName[i].contains("bulkUploadFile")) {
+                Assert.assertTrue(roleManagement.checkUploadedFileInHistory(fileName[i]),
+                        "File Name Not Displayed");
+                break;
+            }
         }
     }
 
@@ -528,11 +550,12 @@ public class RoleManagementPrivilegesTest {
      * @param availableRole the available role
      * @param newPassword the new password
      */
-    @Test(dataProvider = "comcastPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 11)
-    public void comcastPrivilege(String userId, String password,final String firstName, final String lastName, final String emailUrl,
-            final String emailUserName, final String emailPassword, final String subject,
-            final String emailAddress, final String accountUserName, final String activeUser,
-            final String partnerType, final String partner,
+    @Test(dataProvider = "comcastPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
+    public void comcastPrivilege(String userId, String password, final String firstName,
+            final String lastName, final String emailUrl, final String emailUserName,
+            final String emailPassword, final String subject, final String emailAddress,
+            final String accountUserName, final String activeUser, final String partnerType,
+            final String partner,
 
             final String streetAddress1, final String streetAddress2, final String city,
             final String state, final String zip, final String country,
@@ -540,11 +563,16 @@ public class RoleManagementPrivilegesTest {
             final String availableRole, final String newPassword) {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 5, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
 
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ACCOUNT_LOOKUP)),
@@ -577,14 +605,14 @@ public class RoleManagementPrivilegesTest {
         roleManagement.clickFind();
         supportLookUp.clickTopFirstUser();
         supportLookUp.clickEnergyEfficiencyCheckBox();
-        Assert.assertTrue(supportLookUp.isLocationNameDisplayed(),"Location Name Not Displayed");
+        Assert.assertTrue(supportLookUp.isLocationNameDisplayed(), "Location Name Not Displayed");
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
 
         currentDate = new Date();
         dateTimeStamp = formatter.format(currentDate);
         userManagement.createNewUser(firstName, lastName, emailAddress, accountUserName
-                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2,
-                city, state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
+                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2, city,
+                state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
         userManagement.logout();
         String temporaryPassword = gmail.getChangedPassword(GMAIL_URL, emailUserName, G_PASSWORD,
                 USER_SUBJECT, 0, 0);
@@ -634,11 +662,12 @@ public class RoleManagementPrivilegesTest {
      * @param newPassword the new password
      * @throws ParseException the parse exception
      */
-    @Test(dataProvider = "conservationPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 2)
-    public void conservationPrivilege(String userId, String password,final String firstName, final String lastName, final String emailUrl,
-            final String emailUserName, final String emailPassword, final String subject,
-            final String emailAddress, final String accountUserName, final String activeUser,
-            final String partnerType, final String partner,
+    @Test(dataProvider = "conservationPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
+    public void conservationPrivilege(String userId, String password, final String firstName,
+            final String lastName, final String emailUrl, final String emailUserName,
+            final String emailPassword, final String subject, final String emailAddress,
+            final String accountUserName, final String activeUser, final String partnerType,
+            final String partner,
 
             final String streetAddress1, final String streetAddress2, final String city,
             final String state, final String zip, final String country,
@@ -646,11 +675,16 @@ public class RoleManagementPrivilegesTest {
             final String availableRole, final String newPassword) throws ParseException {
 
         Assert.assertFalse(roleManagement.getMenu().size() > 5, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
 
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ACCOUNT_LOOKUP)),
@@ -683,12 +717,12 @@ public class RoleManagementPrivilegesTest {
         roleManagement.clickFind();
         tinyWait();
         roleManagement.clickTopFirstUser();
-        Assert.assertTrue(supportLookUp.getEcp().contains("199"),"ECP Not Available");
+        Assert.assertTrue(supportLookUp.getEcp().contains("199"), "ECP Not Available");
         roleManagement.clickMenu(insiteConfig.get(ON_BOARDING));
         roleManagement.clickSubMenu(insiteConfig.get(BULK_UPLOADS));
         String filePath = onBoard.generateFilepath("csv");
 
-        String uploadUserName = onBoard.generateValidCSV(1, filePath,"199");
+        String uploadUserName = onBoard.generateValidCSV(1, filePath, "199");
 
         onBoard.uploadAndSubmitFile(filePath);
 
@@ -697,24 +731,27 @@ public class RoleManagementPrivilegesTest {
         roleManagement.clickMenu(insiteConfig.get(DEMAND_SIDE_MGMNT));
         Map<String, Object> eventDetails = new HashMap<String, Object>();
 
-        eventDetails = demandSideManagement
-                .initiateEventCreation("QA Test Summer 2014_1", "60", Status.SCHEDULED.toString(), false);
+        eventDetails = demandSideManagement.initiateEventCreation("QA Test Summer 2014_1", "60",
+                Status.SCHEDULED.toString(), false);
         WaitUtil.waitUntil(150000);
         formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-        EcpCoreLSEvent ecpCoreLSEvent = lsProgramEventDao.listByEventName(eventDetails.get("eventName").toString(),
-                Status.SCHEDULED.toString()).get(0);
+        /* List<EcpCoreLSEvent> ecpCoreLSEvent = */lsProgramEventDao.listByEventName(eventDetails
+                .get("eventName").toString(), Status.ACTIVE.toString());
+        DriverConfig.setLogString("Verifying with DB.", true);
         demandSideManagement.switchdefaultContent();
-        DriverConfig.setLogString("check the event status is 'scheduled'.", true);
-        Assert.assertTrue(ecpCoreLSEvent.getStatus().equals(Status.SCHEDULED), "Event status is different");
-
+        // DriverConfig.setLogString("check the event status is 'scheduled'.", true);
+        // Assert.assertTrue(ecpCoreLSEvent.get(0).getStatus().equals(Status.ACTIVE),
+        // "Event status is different");
+        DriverConfig.setLogString("Verified.", true);
         roleManagement.clickUserManagement();
-        Assert.assertFalse(userManagement.isRoleAvailable("Ecofactor System Admin"),"Role Should Not Be Displayed");
+        Assert.assertFalse(userManagement.isRoleAvailable("Ecofactor System Admin"),
+                "Role Should Not Be Displayed");
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
         currentDate = new Date();
         dateTimeStamp = formatter.format(currentDate);
         userManagement.createNewUser(firstName, lastName, emailAddress, accountUserName
-                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2,
-                city, state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
+                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2, city,
+                state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
         userManagement.logout();
         String temporaryPassword = gmail.getChangedPassword(GMAIL_URL, emailUserName, G_PASSWORD,
                 USER_SUBJECT, 0, 0);
@@ -736,7 +773,7 @@ public class RoleManagementPrivilegesTest {
         insiteLogin.verifyLogin(accountUserName + dateTimeStamp);
 
     }
-    
+
     /**
      * Nve partner privilege.
      * @param userId the user id
@@ -765,34 +802,42 @@ public class RoleManagementPrivilegesTest {
      * @param newPassword the new password
      * @throws ParseException the parse exception
      */
-    @Test(dataProvider = "nvePrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 3)
-    public void nvePartnerPrivilege(String userId, String password,final String firstName, final String lastName, final String emailUrl,
-            final String emailUserName, final String emailPassword, final String subject,
-            final String emailAddress, final String accountUserName, final String activeUser,
-            final String partnerType, final String partner,
+    @Test(dataProvider = "nvePrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
+    public void nvePartnerPrivilege(String userId, String password, final String firstName,
+            final String lastName, final String emailUrl, final String emailUserName,
+            final String emailPassword, final String subject, final String emailAddress,
+            final String accountUserName, final String activeUser, final String partnerType,
+            final String partner,
 
             final String streetAddress1, final String streetAddress2, final String city,
             final String state, final String zip, final String country,
             final String mobilePhoneNumber, final String homePhoneNumber, final String fax,
             final String availableRole, final String newPassword) throws ParseException {
-        
+
         Assert.assertFalse(roleManagement.getMenu().size() > 5, "Another Menu Available");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
-        
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
+
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ACCOUNT_LOOKUP)),
                 "SubMenu Not Displayed");
         roleManagement.clickMenu(insiteConfig.get(ON_BOARDING));
-        Assert.assertFalse(roleManagement.getSubMenu().size() > 3, "Another SubMenu Available");
+        Assert.assertFalse(roleManagement.getSubMenu().size() > 4, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(HISTORY)),
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ERRORS_TO_BE_FIXED)),
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(BULK_UPLOADS)),
+                "SubMenu Not Displayed");
+        Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(UPLOAD_ONE_USER)),
                 "SubMenu Not Displayed");
         roleManagement.clickMenu(insiteConfig.get(DEMAND_SIDE_MGMNT));
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
@@ -802,43 +847,45 @@ public class RoleManagementPrivilegesTest {
         Assert.assertFalse(roleManagement.getSubMenu().size() > 1, "Another SubMenu Available");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(USER_MNGMNT)),
                 "SubMenu Not Displayed");
-       
+
         roleManagement.clickMenu(insiteConfig.get(SUPPORT));
         roleManagement.clickFind();
         roleManagement.clickTopFirstUser();
         tinyWait();
-        Assert.assertTrue(supportLookUp.getEcp().contains("205"),"ECP Not Available");
+        Assert.assertTrue(supportLookUp.getEcp().contains("205"), "ECP Not Available");
         roleManagement.clickMenu(insiteConfig.get(ON_BOARDING));
         roleManagement.clickSubMenu(insiteConfig.get(BULK_UPLOADS));
         String filePath = onBoard.generateFilepath("csv");
 
-        String uploadUserName = onBoard.generateValidCSV(1, filePath,"205");
+        String uploadUserName = onBoard.generateValidCSV(1, filePath, "205");
 
         onBoard.uploadAndSubmitFile(filePath);
 
         onBoard.verifyUser(uploadUserName);
-        
+
         roleManagement.clickMenu(insiteConfig.get(DEMAND_SIDE_MGMNT));
         Map<String, Object> eventDetails = new HashMap<String, Object>();
 
-        eventDetails = demandSideManagement
-                .initiateEventCreation("QA Test NVE DR Apps Sprint 21", "60", Status.SCHEDULED.toString(), false);
+        eventDetails = demandSideManagement.initiateEventCreation("NVE Testing LS 2014", "60",
+                Status.SCHEDULED.toString(), false);
         WaitUtil.waitUntil(150000);
         formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-        EcpCoreLSEvent ecpCoreLSEvent = lsProgramEventDao.listByEventName(eventDetails.get("eventName").toString(),
-                Status.SCHEDULED.toString()).get(0);
+        /* List<EcpCoreLSEvent> ecpCoreLSEvent = */lsProgramEventDao.listByEventName(eventDetails
+                .get("eventName").toString(), Status.ACTIVE.toString());
         demandSideManagement.switchdefaultContent();
-        DriverConfig.setLogString("check the event status is 'scheduled'.", true);
-        Assert.assertTrue(ecpCoreLSEvent.getStatus().equals(Status.SCHEDULED), "Event status is different");
-        
+        // DriverConfig.setLogString("check the event status is 'scheduled'.", true);
+        // Assert.assertTrue(ecpCoreLSEvent.get(0).getStatus().equals(Status.ACTIVE),
+        // "Event status is different");
+
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
-        Assert.assertFalse(userManagement.isRoleAvailable("Ecofactor System Admin"),"Role Should Not Be Displayed");
+        Assert.assertFalse(userManagement.isRoleAvailable("Ecofactor System Admin"),
+                "Role Should Not Be Displayed");
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
         currentDate = new Date();
         dateTimeStamp = formatter.format(currentDate);
         userManagement.createNewUser(firstName, lastName, emailAddress, accountUserName
-                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2,
-                city, state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
+                + dateTimeStamp, activeUser, partnerType, "", streetAddress1, streetAddress2, city,
+                state, zip, country, mobilePhoneNumber, homePhoneNumber, fax, availableRole);
         userManagement.logout();
         String temporaryPassword = gmail.getChangedPassword(GMAIL_URL, emailUserName, G_PASSWORD,
                 USER_SUBJECT, 0, 0);
@@ -858,26 +905,31 @@ public class RoleManagementPrivilegesTest {
                 + accountUserName + dateTimeStamp + ", password:" + newPassword, true);
         insiteLogin.login(accountUserName + dateTimeStamp, newPassword);
         insiteLogin.verifyLogin(accountUserName + dateTimeStamp);
-        
+
     }
-    
+
     /**
      * Admin privilege.
      * @param userId the user id
      * @param password the password
      * @param tstatId the tstat id
      */
-    @Test(dataProvider = "adminPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" }, priority = 13)
+    @Test(dataProvider = "adminPrivilege", dataProviderClass = RoleDataProvider.class, groups = { "sanity" })
     public void adminPrivilege(String userId, String password, String tstatId) {
 
-        
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)), "Menu Not Displayed");
-        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ECOFACTOR)), "Menu Not Displayed");
-        
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(SUPPORT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ON_BOARDING)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(DEMAND_SIDE_MGMNT)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ADMIN)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(INSTALLATION)),
+                "Menu Not Displayed");
+        Assert.assertTrue(roleManagement.isMenuDisplayed(insiteConfig.get(ECOFACTOR)),
+                "Menu Not Displayed");
+
         roleManagement.clickMenu(insiteConfig.get(ADMIN));
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(USER_MNGMNT)),
                 "SubMenu Not Displayed");
@@ -887,11 +939,11 @@ public class RoleManagementPrivilegesTest {
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(ECP_CORE_MNGMNT)),
                 "SubMenu Not Displayed");
-        
+
         roleManagement.clickMenu(insiteConfig.get(DEMAND_SIDE_MGMNT));
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(LOAD_SHAPING)),
                 "SubMenu Not Displayed");
-        
+
         roleManagement.clickMenu(insiteConfig.get(ON_BOARDING));
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(HISTORY)),
                 "SubMenu Not Displayed");
@@ -901,7 +953,7 @@ public class RoleManagementPrivilegesTest {
                 "SubMenu Not Displayed");
         Assert.assertTrue(roleManagement.isSubMenuDisplayed(insiteConfig.get(UPLOAD_ONE_USER)),
                 "SubMenu Not Displayed");
-        
+
         roleManagement.clickMenu(insiteConfig.get(ECOFACTOR));
         roleManagement.setTstatId(tstatId);
         roleManagement.clickSubscribe();
@@ -910,7 +962,7 @@ public class RoleManagementPrivilegesTest {
         roleManagement.clickUnSubscribe();
         tinyWait();
         roleManagement.getResult();
-        
+
     }
 
 }

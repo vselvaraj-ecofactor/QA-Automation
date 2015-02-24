@@ -25,10 +25,10 @@ import com.ecofactor.qa.automation.dao.DaoModule;
 import com.ecofactor.qa.automation.insite.InsiteModule;
 import com.ecofactor.qa.automation.insite.data.UserRoleDataProvider;
 import com.ecofactor.qa.automation.insite.page.InsiteLogin;
-import com.ecofactor.qa.automation.insite.page.UserManagement;
+
 import com.ecofactor.qa.automation.insite.page.UserRoleManagement;
 import com.ecofactor.qa.automation.util.RerunFailTestAnalyzer;
-import com.ecofactor.qa.automation.util.TestlinkUtil;
+
 import com.ecofactor.qa.automation.util.UtilModule;
 import com.ecofactor.qa.automation.util.TestLogUtil;
 import com.ecofactor.qa.automation.util.test.JobValidator;
@@ -36,6 +36,7 @@ import com.google.inject.Inject;
 
 /**
  * The Class UserRoleTest.
+ * 
  * @author $Author:$
  * @version $Rev:$ $Date:$
  */
@@ -43,24 +44,32 @@ import com.google.inject.Inject;
 @Listeners(JobValidator.class)
 public class UserRoleTest {
 
-    @Inject
-    private InsiteLogin insiteLogin;
-    @Inject
-    private UserRoleManagement userRoleManagement;
-    @Inject
-    private UserManagement userManagement;
-    @Inject
-    private TestlinkUtil testLinkUtil;
-    @Inject
-    private TestLogUtil testLogUtil;
-    private static Logger logger = LoggerFactory.getLogger(UserRoleTest.class);
-    private long start;
+	/** The insite login. */
+	@Inject
+	private InsiteLogin insiteLogin;
 
-    /**
-     * Inits the method.
-     * @param param the param
-     * @param method the method
-     */
+	/** The user role management. */
+	@Inject
+	private UserRoleManagement userRoleManagement;
+
+	/** The test log util. */
+	@Inject
+	private TestLogUtil testLogUtil;
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory.getLogger(UserRoleTest.class);
+
+	/** The start. */
+	private long start;
+
+	/**
+	 * Inits the method.
+	 * 
+	 * @param param
+	 *            the param
+	 * @param method
+	 *            the method
+	 */
 	@BeforeMethod(alwaysRun = true)
 	public void initMethod(Object[] param, Method method) {
 
@@ -75,10 +84,12 @@ public class UserRoleTest {
 		}
 	}
 
-    /**
-     * End method.
-     * @param method the method
-     */
+	/**
+	 * End method.
+	 * 
+	 * @param method
+	 *            the method
+	 */
 	@AfterMethod(alwaysRun = true)
 	public void endMethod(Method method) {
 
@@ -86,130 +97,167 @@ public class UserRoleTest {
 		testLogUtil.logEnd(method, duration);
 	}
 
-    /**
-     * End Class.
-     */
-    @AfterClass(alwaysRun = true)
-    public void endClass() {
+	/**
+	 * End Class.
+	 */
+	@AfterClass(alwaysRun = true)
+	public void endClass() {
 
-        try {
-            userRoleManagement.logout();
-        } catch (Throwable e) {
-            logger.error("Error in after class method " + e.getMessage(), true);
-        }
-    }
+		try {
+			userRoleManagement.logout();
+		} catch (Throwable e) {
+			logger.error("Error in after class method " + e.getMessage(), true);
+		}
+	}
 
-    /**
-     * End Suite.
-     */
-    @AfterSuite(alwaysRun = true)
-    public void endSuite() {
+	/**
+	 * End Suite.
+	 */
+	@AfterSuite(alwaysRun = true)
+	public void endSuite() {
 
-        try {
-            userRoleManagement.end();
-        } catch (Throwable e) {
-            logger.error("Error in after suite method " + e.getMessage(), true);
-        }
-    }
+		try {
+			userRoleManagement.end();
+		} catch (Throwable e) {
+			logger.error("Error in after suite method " + e.getMessage(), true);
+		}
+	}
 
-    /**
-     * Test ecp roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testEcpRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
-            "smoke", "sanity" })
-    public void testEcpRoles(String userId, String password) {
+	/**
+	 * Test ecp roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testEcpRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
+			"smoke", "sanity" })
+	public void testEcpRoles(String userId, String password) {
 
-        userRoleManagement.testEcpRoles(userId, password);
+		userRoleManagement.testEcpRoles(userId, password);
 
-    }
+	}
 
-    /**
-     * Test install roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testInstallRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
-            "smoke", "sanity" })
-    public void testInstallRoles(String userId, String password) {
+	/**
+	 * Test install roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testInstallRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
+			"smoke", "sanity" })
+	public void testInstallRoles(String userId, String password) {
 
-        userRoleManagement.testInstallRoles(userId, password);
+		userRoleManagement.testInstallRoles(userId, password);
 
-    }
+	}
 
-    /**
-     * Test service roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testServiceRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
-            "smoke", "sanity" })
-    public void testServiceRoles(String userId, String password) {
+	/**
+	 * Test service roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testServiceRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
+			"smoke", "sanity" })
+	public void testServiceRoles(String userId, String password) {
 
-        userRoleManagement.testServiceRoles(userId, password);
-    }
+		userRoleManagement.testServiceRoles(userId, password);
+	}
 
-    /**
-     * Test util roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testUtilRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
-            "smoke", "sanity" })
-    public void testUtilRoles(String userId, String password) {
+	/**
+	 * Test util roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testUtilRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
+			"smoke", "sanity" })
+	public void testUtilRoles(String userId, String password) {
 
-        userRoleManagement.testUtilRoles(userId, password);
-    }
+		userRoleManagement.testUtilRoles(userId, password);
+	}
 
-    /**
-     * Test custom roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testCustomRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
-            "smoke", "sanity" })
-    public void testCustomRoles(String userId, String password) {
+	/**
+	 * Test custom roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testCustomRoles", dataProviderClass = UserRoleDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {
+			"smoke", "sanity" })
+	public void testCustomRoles(String userId, String password) {
 
-        userRoleManagement.testCustomRoles(userId, password);
-    }
+		userRoleManagement.testCustomRoles(userId, password);
+	}
 
-    /**
-     * Test customer care roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testCustomerCareRoles", dataProviderClass = UserRoleDataProvider.class, groups = { "smoke",
-            "sanity" })
-    public void testCustomerCareRoles(String userId, String password) {
+	/**
+	 * Test customer care roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testCustomerCareRoles", dataProviderClass = UserRoleDataProvider.class, groups = {
+			"smoke", "sanity" })
+	public void testCustomerCareRoles(String userId, String password) {
 
-        userRoleManagement.testCustomerCareRoles(userId, password);
-    }
+		userRoleManagement.testCustomerCareRoles(userId, password);
+	}
 
-    /**
-     * Test ef admin roles.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "testEFAdminRoles", dataProviderClass = UserRoleDataProvider.class, groups = { "smoke",
-            "sanity" })
-    public void testEFAdminRoles(String userId, String password) {
+	/**
+	 * Test ef admin roles.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testEFAdminRoles", dataProviderClass = UserRoleDataProvider.class, groups = {
+			"smoke", "sanity" })
+	public void testEFAdminRoles(String userId, String password) {
 
-        userRoleManagement.testEFAdminRoles(userId, password);
-    }
+		userRoleManagement.testEFAdminRoles(userId, password);
+	}
 
-    @Test(dataProvider = "testCustomAddPagesUserRoleTest", dataProviderClass = UserRoleDataProvider.class, groups = { "smoke",
-            "sanity" })
-    public void testCustomAddUserPages(String userId, String password) {
+	/**
+	 * Test custom add user pages.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testCustomAddPagesUserRoleTest", dataProviderClass = UserRoleDataProvider.class, groups = {
+			"smoke", "sanity" })
+	public void testCustomAddUserPages(String userId, String password) {
 
-        userRoleManagement.testTwoRolesAddedPagesUser(userId, password);
-    }
+		userRoleManagement.testTwoRolesAddedPagesUser(userId, password);
+	}
 
-    @Test(dataProvider = "testCustomRemvePagesUserRoleTest", dataProviderClass = UserRoleDataProvider.class, groups = { "smoke",
-            "sanity" })
-    public void testCustomRemveUserPages(String userId, String password) {
+	/**
+	 * Test custom remve user pages.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "testCustomRemvePagesUserRoleTest", dataProviderClass = UserRoleDataProvider.class, groups = {
+			"smoke", "sanity" })
+	public void testCustomRemveUserPages(String userId, String password) {
 
-        userRoleManagement.testTwoRolesRemovedPagesUser(userId, password);
-    }
+		userRoleManagement.testTwoRolesRemovedPagesUser(userId, password);
+	}
 
 }

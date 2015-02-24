@@ -31,9 +31,9 @@ import org.testng.annotations.Test;
 import com.ecofactor.qa.automation.dao.DaoModule;
 import com.ecofactor.qa.automation.insite.InsiteModule;
 import com.ecofactor.qa.automation.insite.config.InsiteConfig;
-import com.ecofactor.qa.automation.insite.config.InstallationTestConfig;
+
 import com.ecofactor.qa.automation.insite.data.InstallationHardwareDataProvider;
-import com.ecofactor.qa.automation.insite.page.InsiteLogin;
+
 import com.ecofactor.qa.automation.insite.page.InstallationHardware;
 import com.ecofactor.qa.automation.util.RerunFailTestAnalyzer;
 import com.ecofactor.qa.automation.util.TestLogUtil;
@@ -44,53 +44,66 @@ import com.google.inject.Inject;
 /**
  * <b>Installation Hardware</b>
  * <ol>
- * <li>Checks the installation wizard still 6th wizard and iterate until according to the invocation
- * count</li>
+ * <li>Checks the installation wizard still 6th wizard and iterate until
+ * according to the invocation count</li>
  * </ol>
  * .
+ * 
  * @author Aximsoft
  */
 @Guice(modules = { UtilModule.class, DaoModule.class, InsiteModule.class })
 @Listeners(JobValidator.class)
 public class InstallationHardwareTest {
-    @Inject
-    private InsiteLogin insiteLogin;
-    @Inject
-    private InstallationHardware installationHardware;
-    @Inject
-    private static InstallationTestConfig installationTestConfig;
-    @Inject
-    private InsiteConfig appConfig;
-    @Inject
-    private TestLogUtil testLogUtil;
-    private static Logger logger = LoggerFactory.getLogger(InstallationHardwareTest.class);
-    private long start;
 
-    /**
-     * Inits the suite.
-     */
-    @BeforeSuite(alwaysRun = true)
-    public void initSuite() {
-        HttpURLConnection  urlConnection=null;
-        String insiteURLString = null;
-        int status=-1;
-        try {
-            insiteURLString = appConfig.get(INSITE_URL) + appConfig.get(INSITE_LOGIN_URL);
-            URL insiteURL = new URL(insiteURLString);
-            urlConnection =(HttpURLConnection) insiteURL.openConnection();
-            urlConnection.setReadTimeout(5000);
-              status = urlConnection.getResponseCode();
-        } catch (IOException e) {
-            if (status != HttpURLConnection.HTTP_OK) {
-                fail("Unable to connect insite portal '"+insiteURLString+"'. The site is down!");
-            }
-        }
-    }
+	/** The installation hardware. */
+	@Inject
+	private InstallationHardware installationHardware;
 
-    /**
-     * Inits the method.
-     * @param param the param
-     */
+	/** The app config. */
+	@Inject
+	private InsiteConfig appConfig;
+
+	/** The test log util. */
+	@Inject
+	private TestLogUtil testLogUtil;
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory
+			.getLogger(InstallationHardwareTest.class);
+
+	/** The start. */
+	private long start;
+
+	/**
+	 * Inits the suite.
+	 */
+	@BeforeSuite(alwaysRun = true)
+	public void initSuite() {
+
+		HttpURLConnection urlConnection = null;
+		String insiteURLString = null;
+		int status = -1;
+		try {
+			insiteURLString = appConfig.get(INSITE_URL)
+					+ appConfig.get(INSITE_LOGIN_URL);
+			URL insiteURL = new URL(insiteURLString);
+			urlConnection = (HttpURLConnection) insiteURL.openConnection();
+			urlConnection.setReadTimeout(5000);
+			status = urlConnection.getResponseCode();
+		} catch (IOException e) {
+			if (status != HttpURLConnection.HTTP_OK) {
+				fail("Unable to connect insite portal '" + insiteURLString
+						+ "'. The site is down!");
+			}
+		}
+	}
+
+	/**
+	 * Inits the method.
+	 * 
+	 * @param param
+	 *            the param
+	 */
 	@BeforeMethod(alwaysRun = true)
 	public void initMethod(Object[] param, Method method) {
 
@@ -104,179 +117,220 @@ public class InstallationHardwareTest {
 		}
 	}
 
-    /**
-     * End method.
-     * @param m the m
-     */
-    @AfterMethod(alwaysRun = true)
-    public void endMethod(Method method) {
+	/**
+	 * End method.
+	 * 
+	 * @param m
+	 *            the m
+	 */
+	@AfterMethod(alwaysRun = true)
+	public void endMethod(Method method) {
 
-    	long duration = (System.currentTimeMillis() - start) / 1000;
-        testLogUtil.logEnd(method, duration);
-    }
+		long duration = (System.currentTimeMillis() - start) / 1000;
+		testLogUtil.logEnd(method, duration);
+	}
 
-    /**
-     * End Class.
-     */
-    @AfterClass(alwaysRun = true)
-    public void endClass() {
+	/**
+	 * End Class.
+	 */
+	@AfterClass(alwaysRun = true)
+	public void endClass() {
 
-        try {
-            installationHardware.logout();
-        } catch (Throwable e) {
-            logger.error("Error in after class " + e.getMessage());
-        }
-    }
+		try {
+			installationHardware.logout();
+		} catch (Throwable e) {
+			logger.error("Error in after class " + e.getMessage());
+		}
+	}
 
-    /**
-     * End Suite.
-     */
-    @AfterSuite(alwaysRun = true)
-    public void endSuite() {
+	/**
+	 * End Suite.
+	 */
+	@AfterSuite(alwaysRun = true)
+	public void endSuite() {
 
-        try {
-            installationHardware.end();
-        } catch (Throwable e) {
-            logger.error("Error in after suite " + e.getMessage());
-        }
-    }
+		try {
+			installationHardware.end();
+		} catch (Throwable e) {
+			logger.error("Error in after suite " + e.getMessage());
+		}
+	}
 
-    /**
-     * <ol>
-     * <li>Test Installed hardware</li>
-     * </ol>
-     * .
-     * @param userName the user name
-     * @param password the password
-     * @param streetAddressValue the street address value
-     * @param noOfLoops the no of loops
-     */
-    //@Test(dataProvider = "testInstallationHW", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "blocked" })
-    public void testInstallationHardware(final String userName, final String password, final String streetAddressValue,
-            final String noOfLoops) {
+	/**
+	 * <ol>
+	 * <li>Test Installed hardware</li>
+	 * </ol>
+	 * .
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param password
+	 *            the password
+	 * @param streetAddressValue
+	 *            the street address value
+	 * @param noOfLoops
+	 *            the no of loops
+	 */
+	// @Test(dataProvider = "testInstallationHW", dataProviderClass =
+	// InstallationHardwareDataProvider.class, retryAnalyzer =
+	// RerunFailTestAnalyzer.class, groups =
+	// { "blocked" },priority = 1)
+	public void testInstallationHardware(final String userName,
+			final String password, final String streetAddressValue,
+			final String noOfLoops) {
 
-        installationHardware.testInstallationStuff(streetAddressValue);
+		installationHardware.testInstallationStuff(streetAddressValue);
 
-    }
+	}
 
-    /**
-     * Ecofactor logo link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void headerLogoLink(String userId, String password) {
+	/**
+	 * Ecofactor logo link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 2)
+	public void headerLogoLink(String userId, String password) {
 
-        installationHardware.isLogoDisplayed();
+		installationHardware.isLogoDisplayed();
 
-    }
+	}
 
-    /**
-     * Test the welcome text for the logged in user in the insite home page.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void welcomeText(String userId, String password) {
+	/**
+	 * Test the welcome text for the logged in user in the insite home page.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 3)
+	public void welcomeText(String userId, String password) {
 
-        installationHardware.verifyWelcomeText(userId);
+		installationHardware.verifyWelcomeText(userId);
 
-    }
+	}
 
-    /**
-     * Test the account link in the insite home page.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void supportLink(String userId, String password) {
+	/**
+	 * Test the account link in the insite home page.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 4)
+	public void supportLink(String userId, String password) {
 
-        installationHardware.clickSupport();
+		installationHardware.clickSupport();
 
-    }
+	}
 
-    /**
-     * Installation link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void installationLink(String userId, String password) {
+	/**
+	 * Installation link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 5)
+	public void installationLink(String userId, String password) {
 
-        installationHardware.clickInstallation();
+		installationHardware.clickInstallation();
 
-    }
+	}
 
-    /**
-     * Installation schedule link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void installationScheduleLink(String userId, String password) {
+	/**
+	 * User management link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 6)
+	public void userManagementLink(String userId, String password) {
 
-        installationHardware.clickScheduling();
+		installationHardware.clickUserManagement();
 
-    }
+	}
 
-    /**
-     * Installation pre config link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void installationPreConfigLink(String userId, String password) {
+	/**
+	 * Role management link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 7)
+	public void roleManagementLink(String userId, String password) {
 
-        installationHardware.clickPreConfiguration();
+		installationHardware.clickRoleManagement();
 
-    }
+	}
 
-    /**
-     * User management link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void userManagementLink(String userId, String password) {
+	/**
+	 * Demand side management link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 8)
+	public void demandSideManagementLink(String userId, String password) {
 
-        installationHardware.clickUserManagement();
+		installationHardware.clickDemandSideManagement();
 
-    }
+	}
 
-    /**
-     * Role management link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void roleManagementLink(String userId, String password) {
+	/**
+	 * Installation pre config link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 9)
+	public void installationPreConfigLink(String userId, String password) {
 
-        installationHardware.clickRoleManagement();
+		installationHardware.clickPreConfiguration();
 
-    }
+	}
 
-    /**
-     * Demand side management link.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void demandSideManagementLink(String userId, String password) {
+	/**
+	 * Installation schedule link.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 10)
+	public void installationScheduleLink(String userId, String password) {
 
-        installationHardware.clickDemandSideManagement();
+		installationHardware.clickScheduling();
 
-    }
+	}
 
-    /**
-     * Test the user logout from a insite authenticated page.
-     * @param userId the user id
-     * @param password the password
-     */
-    @Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = {"smoke"})
-    public void logout(String userId, String password) {
+	/**
+	 * Test the user logout from a insite authenticated page.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param password
+	 *            the password
+	 */
+	@Test(dataProvider = "validLogin", dataProviderClass = InstallationHardwareDataProvider.class, retryAnalyzer = RerunFailTestAnalyzer.class, groups = { "smoke" }, priority = 11)
+	public void logout(String userId, String password) {
 
-        installationHardware.logout();
+		installationHardware.logout();
 
-    }
+	}
 
 }
