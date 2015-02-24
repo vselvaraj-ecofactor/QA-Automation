@@ -131,6 +131,7 @@ public class LSProgramEventDaoImpl extends BaseDaoImpl<EcpCoreLSEvent> implement
     /**
      * Update event status based on Event name.
      * @param eventName the event name.
+     * @return the int
      * @see com.ecofactor.qa.automation.dao.dr.LSProgramEventDao#updateEventStatus(java.lang.String)
      */
     @Override
@@ -180,8 +181,9 @@ public class LSProgramEventDaoImpl extends BaseDaoImpl<EcpCoreLSEvent> implement
     }
 
     /**
-     * @param eventName
-     * @return
+     * Update event by start date.
+     * @param eventName the event name
+     * @return the map
      * @see com.ecofactor.qa.automation.dao.dr.LSProgramEventDao#updateEventByStartDate(java.lang.String)
      */
     @Override

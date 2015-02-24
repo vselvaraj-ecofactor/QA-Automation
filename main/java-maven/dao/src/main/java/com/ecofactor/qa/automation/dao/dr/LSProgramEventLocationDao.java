@@ -9,15 +9,12 @@
  */
 package com.ecofactor.qa.automation.dao.dr;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.ecofactor.common.pojo.EcpCoreLSEvent;
 import com.ecofactor.common.pojo.EcpCoreLSEventLocation;
 import com.ecofactor.qa.automation.dao.BaseDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface LSProgramEventLocationDao.
  * @author $Author:$
@@ -38,8 +35,8 @@ public interface LSProgramEventLocationDao extends BaseDao<EcpCoreLSEventLocatio
      * @param eventStatus the event status
      * @return the list
      */
-    public List<EcpCoreLSEventLocation> listByProgramEventAndStatus(
-            final Integer lsProgramEvent, final String eventStatus);
+    public List<EcpCoreLSEventLocation> listByProgramEventAndStatus(final Integer lsProgramEvent,
+            final String eventStatus);
 
     /**
      * List by program event location id and status.
@@ -48,8 +45,8 @@ public interface LSProgramEventLocationDao extends BaseDao<EcpCoreLSEventLocatio
      * @param eventStatus the event status
      * @return the list
      */
-    public List<EcpCoreLSEventLocation> listByProgramEventLocationIdAndStatus(
-            final EcpCoreLSEvent lsProgramEvent, final Integer locationId, final String eventStatus);
+    public List<EcpCoreLSEventLocation> listByProgramEventLocationId(
+            final EcpCoreLSEvent lsProgramEvent, final Integer locationId);
 
     /**
      * List by location id.
@@ -93,6 +90,6 @@ public interface LSProgramEventLocationDao extends BaseDao<EcpCoreLSEventLocatio
      * @param programEventId the program event id.
      * @return map.
      */
-    public List<String> fullListByLocationIdStatus(Integer programEventId);   
-   
+    public List<String> fullListByLocationIdStatus(Integer programEventId);
+
 }

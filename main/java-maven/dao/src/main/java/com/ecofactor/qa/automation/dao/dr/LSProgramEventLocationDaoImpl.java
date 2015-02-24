@@ -20,7 +20,6 @@ import com.ecofactor.common.pojo.EcpCoreLSEventLocation;
 import com.ecofactor.common.pojo.Status;
 import com.ecofactor.qa.automation.dao.BaseDaoImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LSProgramEventLocationDaoImpl.
  * @author $Author:$
@@ -40,7 +39,7 @@ public class LSProgramEventLocationDaoImpl extends BaseDaoImpl<EcpCoreLSEventLoc
 
         final String sql = "SELECT lsEventLocation from EcpCoreLSEventLocation lsEventLocation where lsEventLocation.ecpCoreLSEvent.id=:lsEventId";
         final Map<String, Object> paramVals = new HashMap<String, Object>();
-        paramVals.put("ecpCoreLSEvent", lsProgramEvent);
+        paramVals.put("lsEventId", lsProgramEvent);
         List<EcpCoreLSEventLocation> values = listByQuery(sql, paramVals);
         return values;
     }
@@ -75,15 +74,15 @@ public class LSProgramEventLocationDaoImpl extends BaseDaoImpl<EcpCoreLSEventLoc
      *      java.lang.Integer, java.lang.String)
      */
     @Override
-    public List<EcpCoreLSEventLocation> listByProgramEventLocationIdAndStatus(
-            final EcpCoreLSEvent lsProgramEvent, final Integer locationId, final String eventStatus) {
+    public List<EcpCoreLSEventLocation> listByProgramEventLocationId(
+            final EcpCoreLSEvent lsProgramEvent, final Integer locationId) {
 
         final String sql = "select t from EcpCoreLSEventLocation t  where t.ecpCoreLSEvent = :ecpCoreLSEvent "
-                + "and t.locationId = :locationId and t.status = :status";
+                + "and t.locationId = :locationId";
         final Map<String, Object> paramVals = new HashMap<String, Object>();
         paramVals.put("ecpCoreLSEvent", lsProgramEvent);
         paramVals.put("locationId", locationId);
-        paramVals.put("status", Status.valueOf(eventStatus));
+     //   paramVals.put("status", Status.valueOf(eventStatus));
         return listByQuery(sql, paramVals);
     }
 

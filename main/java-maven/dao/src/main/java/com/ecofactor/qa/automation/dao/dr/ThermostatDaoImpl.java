@@ -17,7 +17,6 @@ import com.ecofactor.common.pojo.Status;
 import com.ecofactor.common.pojo.Thermostat;
 import com.ecofactor.qa.automation.dao.BaseDaoImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ThermostatDaoImpl.
  * @author $Author:$
@@ -72,14 +71,14 @@ public class ThermostatDaoImpl extends BaseDaoImpl<Thermostat> implements Thermo
      *      java.lang.String)
      */
     @Override
-    public long countOfThermostatByStatus(Integer programEventId, String status) {
+    public List<Thermostat> countOfThermostatByStatus(Integer programEventId, String status) {
 
-        String sql = "select sum(thermostat) from(select count(e.id) as thermostat from Thermostat e where e.locationid in (select t.locationid from EcpCoreLSEventLocation t where t.ecpCoreLSEvent.id= :programEventId and t.status = :status) group by e.locationid)as a";
+        String sql = "SELECT tht FROM Thermostat tht WHERE tht.locationid = :locationId and tht.status = :status";
         Map<String, Object> paramVals = new HashMap<String, Object>();
-        paramVals.put("programEventId", programEventId);
+        paramVals.put("locationId", programEventId);
         paramVals.put("status", Status.valueOf(status));
-        final long countOfThermostat = findByQueryInt(sql, paramVals);
-        return countOfThermostat;
+        List<Thermostat> thermostat = listByQuery(sql, paramVals);
+        return thermostat;
     }
 
     /**
@@ -94,6 +93,7 @@ public class ThermostatDaoImpl extends BaseDaoImpl<Thermostat> implements Thermo
         Map<String, Object> paramVals = new HashMap<String, Object>();
         paramVals.put("locationId", locationId);
         List<Thermostat> thermostat = listByQuery(ql, paramVals);
+        // System.out.println(thermostat + "am here");
         return thermostat;
     }
 

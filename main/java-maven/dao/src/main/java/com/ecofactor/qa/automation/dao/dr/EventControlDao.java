@@ -10,44 +10,51 @@
 package com.ecofactor.qa.automation.dao.dr;
 
 import java.text.ParseException;
-import java.util.Date;
-
-import org.joda.time.DateTime;
 
 import com.ecofactor.qa.automation.dao.BaseDao;
 import com.ecofactor.qa.automation.pojo.EventControl;
 
 /**
  * The Interface EventControlDao.
+ * 
  * @author $Author:$
  * @version $Rev:$ $Date:$
  */
 public interface EventControlDao extends BaseDao<EventControl> {
 
-    /**
-     * Update status as INACTIVE.
-     * @param eventProgramId the program event id.
-     */
-    public void updateStatus(Integer eventProgramId,String status);
+	/**
+	 * Update status as INACTIVE.
+	 * 
+	 * @param eventProgramId
+	 *            the program event id.
+	 */
+	public void updateStatus(Integer eventProgramId, String status);
 
-    /**
-     * Update nexpPhaseTime based on event program Id.
-     * @param eventProgramId the program event id.
-     */
-    public void updateNextPhaseTime(Integer eventProgramId);
+	/**
+	 * Update nexpPhaseTime based on event program Id.
+	 * 
+	 * @param eventProgramId
+	 *            the program event id.
+	 */
+	public void updateNextPhaseTime(Integer eventProgramId);
 
-    /**
-     * Fetch the next Phase time.
-     * @param eventProgramId the program event id.
-     * @return String.
-     * @throws ParseException
-     */
-    public String fetchNextPhaseTime(Integer eventProgramId) throws ParseException;
+	/**
+	 * Fetch the next Phase time.
+	 * 
+	 * @param eventProgramId
+	 *            the program event id.
+	 * @return String.
+	 * @throws ParseException
+	 */
+	public String fetchNextPhaseTime(Integer eventProgramId)
+			throws ParseException;
 
-    /**
-     * Fetch the status for specified Event Id
-     * @param eventProgramId the program Event id.
-     * @return String.
-     */
-    public String fetchStatus(Integer eventProgramId);    
+	/**
+	 * Fetch the status for specified Event Id
+	 * 
+	 * @param eventProgramId
+	 *            the program Event id.
+	 * @return String.
+	 */
+	public String fetchStatus(Integer eventProgramId);
 }

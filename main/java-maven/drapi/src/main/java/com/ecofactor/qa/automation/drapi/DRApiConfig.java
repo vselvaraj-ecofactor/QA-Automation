@@ -113,6 +113,7 @@ public class DRApiConfig extends BaseConfig {
     public static final String LOCATION_ID_AWAY = "location.away.id.eco";
     public static final String LOCATION_ID_HEAT = "location.heat.id.eco";
     public static final String LOCATION_ID_DISCONNECTED = "location.disconnected.id.eco";
+    public static final String TSTID_NVE_USER = "tstid.nve.user";
 
     /**
      * Instantiates a new api config.

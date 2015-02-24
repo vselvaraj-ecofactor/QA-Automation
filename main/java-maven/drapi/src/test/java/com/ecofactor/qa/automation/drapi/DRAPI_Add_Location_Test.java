@@ -98,11 +98,13 @@ public class DRAPI_Add_Location_Test extends AbstractTest {
 
         final HttpResponse response = HTTPSClient.postResponse(createUrl, json,
                 HTTPSClient.getPKCSKeyHttpClient("Comcast.p12", "ecofactor"));
+       
+        final String resultValue = HTTPSClient.getResultString(response.getEntity());
+        setLogString("response :'" + resultValue + "'", true);
+        
         Assert.assertTrue(response.getStatusLine().getStatusCode() == 200, "Error Status:"
                 + response.getStatusLine());
 
-        final String resultValue = HTTPSClient.getResultString(response.getEntity());
-        setLogString("response :'" + resultValue + "'", true);
 
         /**
          * storing event name for using to add location

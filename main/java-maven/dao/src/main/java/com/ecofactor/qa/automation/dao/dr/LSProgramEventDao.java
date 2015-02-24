@@ -17,6 +17,7 @@ import com.ecofactor.common.pojo.EcpCoreLSEvent;
 import com.ecofactor.common.pojo.Status;
 import com.ecofactor.qa.automation.dao.BaseDao;
 
+
 /**
  * The Interface LSProgramEventDao.
  * @author $Author:$
@@ -27,6 +28,7 @@ public interface LSProgramEventDao extends BaseDao<EcpCoreLSEvent> {
     /**
      * update event status as cancel.
      * @param eventName the event name.
+     * @return the int
      */
     public int updateEventStatus(String eventName);
 
@@ -47,6 +49,7 @@ public interface LSProgramEventDao extends BaseDao<EcpCoreLSEvent> {
     /**
      * List by event name.
      * @param eventName the event name
+     * @param eventStatus the event status
      * @return the list
      */
     public List<EcpCoreLSEvent> listByEventName(String eventName, String eventStatus);
@@ -69,9 +72,10 @@ public interface LSProgramEventDao extends BaseDao<EcpCoreLSEvent> {
     /**
      * Update program Event based on start date and end date.
      * @param eventName the program event name
+     * @return the map
      */
     public Map<String, Object> updateEventByStartDateAndEndDate(final String eventName);
-    
+
     /**
      * Update event by start date.
      * @param eventName the event name
@@ -79,5 +83,9 @@ public interface LSProgramEventDao extends BaseDao<EcpCoreLSEvent> {
      */
     public Map<String, Object> updateEventByStartDate(final String eventName);
 
+    /**
+     * Update by id.
+     * @param id the id
+     */
     public void updateById(Integer id);
 }
